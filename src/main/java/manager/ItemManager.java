@@ -14,31 +14,26 @@ public class ItemManager {
         this.itemRepository = new ItemRepository(em);
     }
 
-    // Znalezienie przedmiotu po jego unikalnym ID
     public List<Item> getItemByItemID(String itemID) {
         return itemRepository.findByItemID(itemID);  // Korzystanie z metody findByItemID
     }
 
-    // Rejestracja nowego przedmiotu
-    public Item registerItem(String name, double cost, String itemID, boolean available) {// Zapis lub aktualizacja typu przedmiotu
+    public Item registerItem(String name, double cost, String itemID, boolean available) {
         Item item = new Item(name, cost, itemID, available);
         itemRepository.saveOrUpdate(item);
         return item;
     }
 
-    // Znalezienie dostępnych przedmiotów
     public List<Item> getAvailableItems(boolean available) {
-        return itemRepository.findByAvailable(available);  // Korzystanie z metody findByAvailable
+        return itemRepository.findByAvailable(available);
     }
 
-    // Aktualizacja kosztu przedmiotu
     public void updateItemCost(Long id, double itemCost) {
-        itemRepository.updateItemCost(id, itemCost);  // Korzystanie z metody updateItemCost
+        itemRepository.updateItemCost(id, itemCost);
     }
 
-    // Usunięcie przedmiotu
     public void removeItem(Item item) {
-        itemRepository.delete(item);  // Korzystanie z metody delete
+        itemRepository.delete(item);
     }
 
     public void buyItem(Long id) {
@@ -46,18 +41,16 @@ public class ItemManager {
     }
 
     public void updateItem(Long id, String newName, double newCost, boolean newAvailability) {
-        Item item = itemRepository.findById(id);  // Sprawdzenie, czy przedmiot istnieje
+        Item item = itemRepository.findById(id);
 
         if (item == null) {
             throw new IllegalArgumentException("Item with ID " + id + " does not exist.");
         }
 
-        // Aktualizacja właściwości
         item.setItemName(newName);
         item.setItemCost(newCost);
         item.setAvailable(newAvailability);
 
-        // Zapisanie zaktualizowanego przedmiotu
         itemRepository.saveOrUpdate(item);
     }
 

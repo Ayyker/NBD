@@ -16,36 +16,30 @@ public class ClientManager {
         this.clientsRepository = new ClientRepository(em);
     }
 
-    // Znalezienie klienta po ID (BusinessClient lub IndividualClient)
     public Client getClient(Long id) {
         return clientsRepository.findById(id);
     }
 
-    // Rejestracja nowego klienta indywidualnego
     public IndividualClient registerIndividualClient(String firstName, String lastName, String pesel, String address) {
         IndividualClient individualClient = new IndividualClient(firstName, lastName, pesel, address);
         clientsRepository.saveOrUpdate(individualClient);
-        return individualClient;  // Zwracamy zarejestrowanego klienta indywidualnego
+        return individualClient;
     }
 
-    // Rejestracja nowego klienta biznesowego
     public BusinessClient registerBusinessClient(String companyName, String nip, String address, double discount) {
         BusinessClient businessClient = new BusinessClient(companyName, nip, address, discount);
         clientsRepository.saveOrUpdate(businessClient);
-        return businessClient;  // Zwracamy zarejestrowanego klienta biznesowego
+        return businessClient;
     }
 
-    // Znalezienie wszystkich klientów (BusinessClient i IndividualClient)
     public List<Client> getAllClients() {
         return clientsRepository.findAll();
     }
 
-    // Usunięcie klienta
     public void removeClient(Long id) {
         clientsRepository.deleteById(id);
     }
 
-    // Nowa metoda do aktualizacji klienta
     public void updateClient(Long id, String newAddress, String newNameOrFirstName, String newNipOrLastName) {
         Client client = clientsRepository.findById(id);
 

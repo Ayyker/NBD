@@ -23,7 +23,6 @@ public class PurchaseRepository {
     }
 
 
-    // Znalezienie zakupów, które obejmują określony przedmiot
     public List<Purchase> findByItems(Item item) {
         return entityManager.createQuery(
                         "SELECT p FROM Purchase p JOIN p.items i WHERE i = :item", Purchase.class)
@@ -31,7 +30,6 @@ public class PurchaseRepository {
                 .getResultList();
     }
 
-    // Znalezienie zakupów, które zawierają jeden z podanych przedmiotów
     public List<Purchase> findByItemsIn(List<Item> items) {
         return entityManager.createQuery(
                         "SELECT p FROM Purchase p JOIN p.items i WHERE i IN :items", Purchase.class)
@@ -40,7 +38,6 @@ public class PurchaseRepository {
     }
 
 
-    // Znalezienie zakupów przypisanych do konkretnego klienta
     public List<Purchase> findByCustomer(Client client) {
         return entityManager.createQuery(
                         "SELECT p FROM Purchase p WHERE p.client = :client", Purchase.class)
@@ -48,7 +45,6 @@ public class PurchaseRepository {
                 .getResultList();
     }
 
-    // Zapis lub aktualizacja zakupu
     @Transactional
     public void saveOrUpdate(Purchase purchase) {
         if (purchase.getId() == null) {
@@ -59,7 +55,6 @@ public class PurchaseRepository {
         }
     }
 
-    // Usunięcie zakupu
     @Transactional
     public void delete(Purchase purchase) {
         Purchase attachedPurchase = entityManager.find(Purchase.class, purchase.getId());

@@ -44,7 +44,6 @@ public abstract class Client {
         this.address = address;
     }
 
-    // Abstrakcyjna metoda do zniżek
     public abstract double getDiscount();
 
     @Override

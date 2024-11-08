@@ -27,7 +27,6 @@ public class BusinessClient extends Client {
     @Column(nullable = false)
     private double discount;
 
-    // Konstruktor przyjmujący companyName, nipID, address
     public BusinessClient(String companyName, String nipID, String address, double discount) {
         super(nipID, address);
         this.companyName = companyName;

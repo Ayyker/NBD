@@ -20,23 +20,21 @@ public class ItemRepository {
         return entityManager.find(Item.class, id);
     }
 
-    // Znalezienie przedmiotu po jego unikalnym identyfikatorze z blokadą optymistyczną
     @Transactional
     public List<Item> findByItemID(String itemID) {
         return entityManager.createQuery(
                         "SELECT i FROM Item i WHERE i.itemID = :itemID", Item.class)
                 .setParameter("itemID", itemID)
-                .setLockMode(LockModeType.OPTIMISTIC)  // Zastosowanie blokady optymistycznej
+                .setLockMode(LockModeType.OPTIMISTIC)
                 .getResultList();
     }
 
-    // Znalezienie przedmiotów, które są dostępne, z blokadą optymistyczną
     @Transactional
     public List<Item> findByAvailable(boolean available) {
         return entityManager.createQuery(
                         "SELECT i FROM Item i WHERE i.available = :available", Item.class)
                 .setParameter("available", available)
-                .setLockMode(LockModeType.OPTIMISTIC)  // Zastosowanie blokady optymistycznej
+                .setLockMode(LockModeType.OPTIMISTIC)
                 .getResultList();
     }
 
@@ -51,38 +49,36 @@ public class ItemRepository {
         }
     }
 
-    // Zapis lub aktualizacja przedmiotu z blokadą optymistyczną
     @Transactional
     public void saveOrUpdate(Item item) {
         if (item.getId() == null) {
-            entityManager.persist(item);  // Zapis nowego przedmiotu
+            entityManager.persist(item);
         } else {
-            entityManager.merge(item);  // Aktualizacja istniejącego przedmiotu
+            entityManager.merge(item);
         }
-        entityManager.flush();  // Wymuszenie natychmiastowego zapisu
+        entityManager.flush();
     }
 
-    // Usunięcie przedmiotu
     @Transactional
     public void delete(Item item) {
         if (entityManager.contains(item)) {
-            entityManager.remove(item);  // Usunięcie przedmiotu
+            entityManager.remove(item);
         } else {
             Item attachedItem = entityManager.find(Item.class, item.getId());
             if (attachedItem != null) {
                 entityManager.remove(attachedItem);
             }
         }
-        entityManager.flush();  // Wymuszenie natychmiastowego zapisu
+        entityManager.flush();
     }
 
     public void buyItem(Long id) {
-        Item item = entityManager.find(Item.class, id, LockModeType.OPTIMISTIC); // Pobieramy z blokadą optymistyczną
+        Item item = entityManager.find(Item.class, id, LockModeType.OPTIMISTIC);
         if (item != null) {
             if (!item.isAvailable()) {
                 throw new IllegalStateException("Item is not available for purchase.");
             }
-            item.setAvailable(false); // Oznacz jako kupiony (niedostępny)
+            item.setAvailable(false);
             entityManager.merge(item);
         }
     }

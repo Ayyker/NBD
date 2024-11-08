@@ -44,8 +44,7 @@ public class Purchase{
     private boolean pending;
 
     public double getFinalCost() {
-        // Logika obliczania ostatecznego kosztu zakupu, np. suma kosztów wszystkich przedmiotów
-        return items.stream().mapToDouble(Item::getItemCost).sum() * client.getDiscount();  // Na przykład: 10% zniżki
+        return items.stream().mapToDouble(Item::getItemCost).sum() * client.getDiscount();
     }
 
     @Override
