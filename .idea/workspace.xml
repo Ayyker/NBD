@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="Cleanup before mongoDB">
-      <change afterPath="$PROJECT_DIR$/DockerFiles/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DockerFiles/keyFile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DockerFiles/mongod.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractMongoRepository.java" afterDir="false" />
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="first tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,9 +84,14 @@
     "JUnit.tests in ORM.executor": "Run",
     "Maven.ORM [clean].executor": "Run",
     "Maven.ORM [compile].executor": "Run",
+    "Maven.ORM [dependency:purge-local-repository].executor": "Run",
+    "Maven.ORM [dependency:resolve].executor": "Run",
     "Maven.ORM [install].executor": "Run",
+    "Maven.ORM [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+    "Maven.ORM [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor": "Run",
     "Maven.ORM [site].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "mongoDB",
     "ignore.virus.scanning.warn.message": "true",
@@ -103,9 +103,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.general",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -127,6 +127,11 @@
       <recent name="manager" />
       <recent name="model" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn dependency:purge-local-repository" />
+    </option>
   </component>
   <component name="RunManager" selected="JUnit.tests in ORM">
     <configuration name="ItemManagerTest.testBuyItem_AlreadyUnavailable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -220,8 +225,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
       </set>
     </attachedChunks>
   </component>
@@ -237,7 +242,9 @@
       <workItem from="1729839972782" duration="439000" />
       <workItem from="1731060017837" duration="2320000" />
       <workItem from="1731065493403" duration="4996000" />
-      <workItem from="1732041759050" duration="7154000" />
+      <workItem from="1732041759050" duration="8448000" />
+      <workItem from="1732056467669" duration="731000" />
+      <workItem from="1732107571238" duration="1105000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -263,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731060804517</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="first tests">
+      <option name="closed" value="true" />
+      <created>1732055169781</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732055169781</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,6 +290,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First and last commit" />
     <MESSAGE value="Cleanup before mongoDB" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleanup before mongoDB" />
+    <MESSAGE value="first tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="first tests" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
