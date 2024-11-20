@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="first tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/AbstractMongoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractMongoRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +42,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/mongodb/bson/5.1.1/bson-5.1.1-sources.jar!/org/bson/codecs/jsr310/DateTimeBasedCodec.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/DockerFiles/docker-compose.yml" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/repository/AbstractMongoRepository.java" root0="SKIP_INSPECTION" />
   </component>
@@ -68,6 +70,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.DockerFiles: Compose Deployment.executor": "Run",
     "JUnit.ClientManagerTest.executor": "Run",
     "JUnit.ClientManagerTest.testGetAllClients.executor": "Run",
     "JUnit.ItemManagerTest.executor": "Run",
@@ -110,7 +113,8 @@
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
-      "postgresql"
+      "postgresql",
+      "mongo"
     ]
   }
 }]]></component>
@@ -131,9 +135,10 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn dependency:purge-local-repository" />
+      <command value="mvn dependency:resolve" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.tests in ORM">
+  <component name="RunManager" selected="Docker.DockerFiles: Compose Deployment">
     <configuration name="ItemManagerTest.testBuyItem_AlreadyUnavailable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
@@ -182,22 +187,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PurchaseManagerTest.testUpdatePurchase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ORM" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.PurchaseManagerTest" />
-      <option name="METHOD_NAME" value="testUpdatePurchase" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="tests in ORM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
@@ -212,13 +201,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DockerFiles: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="sourceFilePath" value="DockerFiles/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.DockerFiles: Compose Deployment" />
         <item itemvalue="JUnit.tests in ORM" />
         <item itemvalue="JUnit.ItemManagerTest.testBuyItem_AlreadyUnavailable" />
         <item itemvalue="JUnit.PurchaseManagerTest.testAddItemsToPurchase" />
         <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchase" />
-        <item itemvalue="JUnit.PurchaseManagerTest.testUpdatePurchase" />
       </list>
     </recent_temporary>
   </component>
@@ -244,7 +246,9 @@
       <workItem from="1731065493403" duration="4996000" />
       <workItem from="1732041759050" duration="8448000" />
       <workItem from="1732056467669" duration="731000" />
-      <workItem from="1732107571238" duration="1105000" />
+      <workItem from="1732107571238" duration="1173000" />
+      <workItem from="1732108758809" duration="193000" />
+      <workItem from="1732115406960" duration="2272000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -278,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732055169781</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="first tests">
+      <option name="closed" value="true" />
+      <created>1732108692419</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732108692419</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

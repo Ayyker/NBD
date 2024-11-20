@@ -4,6 +4,11 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.*;
+import org.bson.UuidRepresentation;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.codecs.pojo.Conventions;
 
 import java.util.List;
 
@@ -15,7 +20,7 @@ public abstract class AbstractMongoRepository implements AutoCloseable{
 
     private MongoCredential credential = MongoCredential.createCredential("admin", "admin", "adminpassword".toCharArray());
 
-    private CodecRegisty pojoCodecRegistry = CodecRegisters.fromProviders(
+    private CodecRegistry pojoCodecRegistry = CodecRegistries.fromProviders(
             PojoCodecProvider.builder()
                     .automatic(true)
                     .conventions(List.of(Conventions.ANNOTATION_CONVENTION))
@@ -23,5 +28,21 @@ public abstract class AbstractMongoRepository implements AutoCloseable{
 
     private MongoClient mongoClient;
     private MongoDatabase onlineShopDB;
+
+    private void initDbConnection() {
+        MongoClientSettings settings = MongoClientSettings.builder()
+                .credential(credential)
+                .applyConnectionString(connectionString)
+                .uuidRepresentation(UuidRepresentation.STANDARD)
+                .codecRegistry(CodecRegistries.fromRegistries(
+                        CodecRegistries.fromProviders(new UniqueIdCodecProvider()),
+                        MongoClientSettings.getDefaultCodecRegistry(),
+                        pojoCodecRegistry
+                ))
+                .build();
+
+        mongoClient = MongoClients.create(settings);
+        onlineShopDB = mongoClient.getDatabase("rentacar");
+    }
 
 }
