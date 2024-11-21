@@ -1,5 +1,7 @@
 package manager;
 
+import com.mongodb.client.MongoDatabase;
+import model.Client;
 import model.Item;
 import org.bson.types.ObjectId;
 import repository.ItemRepository;
@@ -25,15 +27,20 @@ public class ItemManager {
         return item;
     }
 
+    public Item registerItem(Item item) {
+        itemRepository.saveOrUpdate(item);
+        return item;
+    }
+
     public List<Item> getAvailableItems(boolean available) {
         List<Item> items = itemRepository.findAll();
-        List<Item> avaibleItems = new ArrayList<>();
+        List<Item> availableItems = new ArrayList<>();
         for (Item item : items) {
-            if (item.isAvailable() != available) {
-                avaibleItems.add(item);
+            if (item.isAvailable() == available) {
+                availableItems.add(item);
             }
         }
-        return avaibleItems;
+        return availableItems;
     }
 
     public void updateItemCost(Item item, double itemCost) {
@@ -43,6 +50,10 @@ public class ItemManager {
 
     public void removeItem(Item item) {
         itemRepository.delete(item.getId());
+    }
+
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
     }
 
     public void buyItem(Item item) {
@@ -62,4 +73,7 @@ public class ItemManager {
         itemRepository.saveOrUpdate(item);
     }
 
+    public MongoDatabase getDatabase() {
+        return itemRepository.getDatabase();
+    }
 }

@@ -1,6 +1,7 @@
 
 package manager;
 
+import com.mongodb.client.MongoDatabase;
 import model.Item;
 import model.Purchase;
 import org.bson.types.ObjectId;
@@ -50,6 +51,10 @@ public class PurchaseManager {
         } catch (Exception e) {
             throw new IllegalStateException("Failed to delete purchase", e);
         }
+    }
+
+    public MongoDatabase getDatabase() {
+        return purchaseRepository.getDatabase();
     }
 
 }

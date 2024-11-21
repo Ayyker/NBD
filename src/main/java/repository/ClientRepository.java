@@ -25,12 +25,7 @@ public class ClientRepository extends AbstractMongoRepository {
     }
 
     public void saveOrUpdate(Client client) {
-        if (client.getId() == null) {
-            client.setId(new ObjectId());
-            clientCollection.insertOne(client);
-        } else {
-            clientCollection.replaceOne(eq("_id", client.getId()), client);
-        }
+        clientCollection.insertOne(client);
     }
 
     public List<Client> findAll() {

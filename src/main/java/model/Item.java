@@ -22,7 +22,7 @@ public class Item {
 
     @BsonProperty("item_name")
     private String itemName;
-
+    
     @BsonProperty("item_cost")
     private double itemCost;
 
@@ -30,7 +30,7 @@ public class Item {
     private boolean available;
 
     @BsonCreator
-    public Item(@BsonProperty("id") ObjectId id,
+    public Item(@BsonProperty("_id") ObjectId id,
                 @BsonProperty("item_id") String itemID,
                 @BsonProperty("item_name") String itemName,
                 @BsonProperty("item_cost") double itemCost,

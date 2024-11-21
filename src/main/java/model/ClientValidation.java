@@ -13,7 +13,7 @@ public class ClientValidation {
                      "properties": {
                         "personal_id": {
                            "bsonType": "string",
-                           "pattern": "^\\d{11}$",
+                           "minLength": 11,
                            "description": "Personal ID must be exactly 11 digits"
                         },
                         "address": {

@@ -3,8 +3,11 @@ package repository;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
-import com.mongodb.client.*;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.CreateCollectionOptions;
+import mappers.ClientCodec;
 import model.ClientValidation;
 import org.bson.UuidRepresentation;
 import org.bson.codecs.configuration.CodecRegistries;
@@ -14,7 +17,6 @@ import org.bson.codecs.pojo.Conventions;
 
 import java.util.List;
 
-
 public abstract class AbstractMongoRepository implements AutoCloseable{
 
     private ConnectionString connectionString = new ConnectionString("mongodb://mongodb1:27017,mongodb2:27018,mongodb3:27019/" +
@@ -22,24 +24,27 @@ public abstract class AbstractMongoRepository implements AutoCloseable{
 
     private MongoCredential credential = MongoCredential.createCredential("admin", "admin", "adminpassword".toCharArray());
 
-    private CodecRegistry pojoCodecRegistry = CodecRegistries.fromProviders(
-            PojoCodecProvider.builder()
-                    .automatic(true)
-                    .conventions(List.of(Conventions.ANNOTATION_CONVENTION))
-                    .build());
-
     private MongoClient mongoClient;
     private MongoDatabase onlineShopDB;
 
     protected void initDbConnection() {
+        CodecRegistry pojoCodecRegistry = CodecRegistries.fromProviders(
+                PojoCodecProvider.builder()
+                        .automatic(true)
+                        .conventions(List.of(Conventions.ANNOTATION_CONVENTION))
+                        .build());
+
+        CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
+                MongoClientSettings.getDefaultCodecRegistry(),
+                CodecRegistries.fromCodecs(new ClientCodec()),  // Dodajemy niestandardowy koder
+                pojoCodecRegistry
+        );
+
         MongoClientSettings settings = MongoClientSettings.builder()
                 .credential(credential)
                 .applyConnectionString(connectionString)
                 .uuidRepresentation(UuidRepresentation.STANDARD)
-                .codecRegistry(CodecRegistries.fromRegistries(
-                        MongoClientSettings.getDefaultCodecRegistry(),
-                        pojoCodecRegistry
-                ))
+                .codecRegistry(codecRegistry)
                 .build();
 
         mongoClient = MongoClients.create(settings);
@@ -49,6 +54,7 @@ public abstract class AbstractMongoRepository implements AutoCloseable{
             onlineShopDB.createCollection("clients", new CreateCollectionOptions().validationOptions(ClientValidation.options));
         }
     }
+
     public boolean collectionExist(String collectionName) {
         for (String existingCollectionName : onlineShopDB.listCollectionNames()) {
             if (existingCollectionName.equals(collectionName))

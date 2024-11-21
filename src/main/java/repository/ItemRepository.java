@@ -22,12 +22,7 @@ public class ItemRepository extends AbstractMongoRepository{
     }
 
     public void saveOrUpdate(Item item) {
-        if (item.getId() == null) {
-            item.setId(new ObjectId());
-            itemCollection.insertOne(item);
-        } else {
-            itemCollection.replaceOne(eq("_id", item.getId()), item);
-        }
+        itemCollection.insertOne(item);
     }
 
     public List<Item> findAll() {

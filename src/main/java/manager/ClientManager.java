@@ -1,5 +1,6 @@
 package manager;
 
+import com.mongodb.client.MongoDatabase;
 import model.BusinessClient;
 import model.Client;
 import model.IndividualClient;
@@ -59,5 +60,9 @@ public class ClientManager {
         }
 
         clientsRepository.saveOrUpdate(client);
+    }
+
+    public MongoDatabase getDatabase() {
+        return clientsRepository.getDatabase();
     }
 }
