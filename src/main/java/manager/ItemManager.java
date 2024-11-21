@@ -1,7 +1,6 @@
 package manager;
 
 import com.mongodb.client.MongoDatabase;
-import model.Client;
 import model.Item;
 import org.bson.types.ObjectId;
 import repository.ItemRepository;
@@ -17,19 +16,18 @@ public class ItemManager {
         this.itemRepository = itemRepository;
     }
 
-    public Item getItemByID(ObjectId id) {
-        return itemRepository.findById(id);
+    public Item getItemByItemID(String itemID) {
+        return itemRepository.findByItemId(itemID);
     }
 
     public Item registerItem(ObjectId id, String name, double cost, String itemID, boolean available) {
         Item item = new Item(id, itemID, name, cost, available);
-        itemRepository.saveOrUpdate(item);
+        itemRepository.save(item);
         return item;
     }
 
-    public Item registerItem(Item item) {
-        itemRepository.saveOrUpdate(item);
-        return item;
+    public void registerItem(Item item) {
+        itemRepository.save(item);
     }
 
     public List<Item> getAvailableItems(boolean available) {
@@ -45,7 +43,7 @@ public class ItemManager {
 
     public void updateItemCost(Item item, double itemCost) {
        item.setItemCost(itemCost);
-        itemRepository.saveOrUpdate(item);
+        itemRepository.update(item);
     }
 
     public void removeItem(Item item) {
@@ -58,7 +56,7 @@ public class ItemManager {
 
     public void buyItem(Item item) {
         item.setAvailable(false);
-        itemRepository.saveOrUpdate(item);
+        itemRepository.update(item);
     }
 
     public void updateItem(Item item, String newName, double newCost, boolean newAvailability) {
@@ -70,10 +68,15 @@ public class ItemManager {
         item.setItemCost(newCost);
         item.setAvailable(newAvailability);
 
-        itemRepository.saveOrUpdate(item);
+        itemRepository.update(item);
     }
 
     public MongoDatabase getDatabase() {
         return itemRepository.getDatabase();
+    }
+
+    public boolean isItemAvailable(ObjectId itemId) {
+        List<Item> availableItems = getAvailableItems(true);
+        return availableItems.stream().anyMatch(item -> item.getId().equals(itemId));
     }
 }

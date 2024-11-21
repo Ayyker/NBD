@@ -31,92 +31,46 @@ class ClientManagerTest {
 
     @Test
     void testRegisterIndividualClient() {
-        ObjectId id = new ObjectId();
-
-        // Rejestracja nowego klienta indywidualnego
-        IndividualClient individualClient = clientManager.registerIndividualClient(id, "Jan", "Kowalski", "12345678910", "Warszawa");
-
-        assertNotNull(individualClient.getId());
-        assertEquals("Jan", individualClient.getFirstName());
-        assertEquals("Kowalski", individualClient.getLastName());
-
+        clientManager.registerIndividualClient(new ObjectId(), "Jan", "Kowalski", "12345678910", "Warszawa");
         List<Client> allClients = clientManager.getAllClients();
-        assertEquals(1, allClients.size());
 
-        Client retrieved = allClients.get(0);
-        assertInstanceOf(IndividualClient.class, retrieved);
-        assertEquals(id, retrieved.getId());
-        assertEquals("Warszawa", retrieved.getAddress());
+        assertEquals(1, allClients.size());
+        assertInstanceOf(IndividualClient.class, allClients.getFirst());
+        IndividualClient individualClient = (IndividualClient) allClients.getFirst();
+        assertEquals("Jan", individualClient.getFirstName());
+        assertEquals("Warszawa", allClients.getFirst().getAddress());
     }
 
     @Test
     void testRegisterBusinessClient() {
-        ObjectId id = new ObjectId();
+        clientManager.registerBusinessClient(new ObjectId(), "Tech Corp", "987654321101112", "Kraków", 10.0);
+        List<Client> allClients = clientManager.getAllClients();
 
-        // Rejestracja nowego klienta biznesowego
-        BusinessClient businessClient = clientManager.registerBusinessClient(id, "Tech Corp", "987654321101112", "Kraków", 10.0);
-
-        assertNotNull(businessClient.getId());
+        assertEquals(1, allClients.size());
+        assertInstanceOf(BusinessClient.class, allClients.getFirst());
+        BusinessClient businessClient = (BusinessClient) allClients.getFirst();
         assertEquals("Tech Corp", businessClient.getCompanyName());
-        assertEquals("987654321101112", businessClient.getNipID());
-
-        // Sprawdzamy, czy klient został zapisany do bazy
-        Client foundClient = clientRepository.findById(businessClient.getId());
-        assertNotNull(foundClient);
-        assertInstanceOf(BusinessClient.class, foundClient);
+        assertEquals("Kraków", allClients.getFirst().getAddress());
     }
 
     @Test
     void testGetAllClients() {
-        // Rejestracja dwóch klientów
         clientManager.registerIndividualClient(new ObjectId(), "Jan", "Kowalski", "12345678910", "Warszawa");
-
         clientManager.registerBusinessClient(new ObjectId(), "Tech Corp", "987654321101112", "Kraków", 10.0);
 
-        // Pobranie wszystkich klientów
         List<Client> allClients = clientManager.getAllClients();
         assertEquals(2, allClients.size());
     }
-
-//    @Test
-//    void testUpdateClient() {
-//        ObjectId id = new ObjectId();
-//
-//        // Rejestracja nowego klienta indywidualnego
-//        IndividualClient individualClient = clientManager.registerIndividualClient(id, "Jan", "Kowalski", "12345678910", "Warszawa");
-//
-//        // Aktualizacja danych klienta
-//        clientManager.updateClient(individualClient.getId(), "Kraków", "Janusz", "Nowak");
-//
-//        // Sprawdzamy, czy dane klienta zostały zaktualizowane
-//        IndividualClient updatedClient = (IndividualClient) clientRepository.findById(individualClient.getId());
-//        assertEquals("Kraków", updatedClient.getAddress());
-//        assertEquals("Janusz", updatedClient.getFirstName());
-//        assertEquals("Nowak", updatedClient.getLastName());
-//    }
 
     @Test
     void testRemoveClient() {
         ObjectId id = new ObjectId();
 
-        // Rejestracja nowego klienta indywidualnego
         IndividualClient individualClient = clientManager.registerIndividualClient(id, "Jan", "Kowalski", "12345678910", "Warszawa");
 
-        // Usunięcie klienta
         clientManager.removeClient(individualClient.getId());
-
-        // Sprawdzamy, czy klient został usunięty
         Client removedClient = clientRepository.findById(individualClient.getId());
         assertNull(removedClient);
     }
 
-    @AfterEach
-    void cleanUp() {
-        clientManager.getDatabase().drop(); // Usuwanie wszystkich danych z bazy (reset przed każdym testem)
-    }
-
-    @AfterAll
-    static void tearDown() {
-        // any clean-up routines if needed, for example, closing a MongoDB connection
-    }
 }

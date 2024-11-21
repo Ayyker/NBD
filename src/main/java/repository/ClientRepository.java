@@ -1,18 +1,14 @@
 package repository;
 
 import com.mongodb.client.MongoCollection;
-
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import model.Client;
-
 import org.bson.types.ObjectId;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
-
 
 public class ClientRepository extends AbstractMongoRepository {
 
@@ -24,8 +20,12 @@ public class ClientRepository extends AbstractMongoRepository {
         clientCollection = database.getCollection("clients", Client.class);
     }
 
-    public void saveOrUpdate(Client client) {
+    public void save(Client client) {
         clientCollection.insertOne(client);
+    }
+
+    public void update(Client client) {
+        clientCollection.replaceOne(eq("_id", client.getId()), client);
     }
 
     public List<Client> findAll() {

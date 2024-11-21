@@ -17,20 +17,19 @@ public class ClientManager {
         this.clientsRepository = clientsRepository;
     }
 
-
     public Client getClient(ObjectId id) {
         return clientsRepository.findById(id);
     }
 
     public IndividualClient registerIndividualClient(ObjectId id,String firstName, String lastName, String pesel, String address) {
         IndividualClient individualClient = new IndividualClient(id, firstName, lastName, pesel, address);
-        clientsRepository.saveOrUpdate(individualClient);
+        clientsRepository.save(individualClient);
         return individualClient;
     }
 
     public BusinessClient registerBusinessClient(ObjectId id, String companyName, String nip, String address, double discount) {
         BusinessClient businessClient = new BusinessClient(id, companyName, nip, address, discount);
-        clientsRepository.saveOrUpdate(businessClient);
+        clientsRepository.save(businessClient);
         return businessClient;
     }
 
@@ -59,7 +58,7 @@ public class ClientManager {
             businessClient.setNipID(newNipOrLastName);
         }
 
-        clientsRepository.saveOrUpdate(client);
+        clientsRepository.update(client);
     }
 
     public MongoDatabase getDatabase() {

@@ -21,8 +21,12 @@ public class ItemRepository extends AbstractMongoRepository{
         itemCollection = database.getCollection("items", Item.class);
     }
 
-    public void saveOrUpdate(Item item) {
+    public void save(Item item) {
         itemCollection.insertOne(item);
+    }
+
+    public void update(Item item) {
+        itemCollection.replaceOne(eq("_id", item.getId()), item);
     }
 
     public List<Item> findAll() {
@@ -33,8 +37,8 @@ public class ItemRepository extends AbstractMongoRepository{
         return items;
     }
 
-    public Item findById(ObjectId id) {
-        return itemCollection.find(Filters.eq("_id", id)).first();
+    public Item findByItemId(String item_id) {
+        return itemCollection.find(Filters.eq("item_id", item_id)).first();
     }
 
     public void delete(ObjectId id) {

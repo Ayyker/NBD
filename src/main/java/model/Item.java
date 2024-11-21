@@ -22,7 +22,7 @@ public class Item {
 
     @BsonProperty("item_name")
     private String itemName;
-    
+
     @BsonProperty("item_cost")
     private double itemCost;
 

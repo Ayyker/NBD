@@ -1,137 +1,128 @@
-//package tests;
-//
-//import jakarta.persistence.EntityManager;
-//import jakarta.persistence.EntityManagerFactory;
-//import jakarta.persistence.Persistence;
-//import manager.PurchaseManager;
-//import model.Client;
-//import model.IndividualClient;
-//import model.Item;
-//import model.Purchase;
-//import org.junit.jupiter.api.*;
-//import repository.PurchaseRepository;
-//
-//import java.util.HashSet;
-//import java.util.List;
-//import java.util.Set;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class PurchaseManagerTest {
-//
-//    private static EntityManagerFactory emf;
-//    private static EntityManager em;
-//    private PurchaseManager purchaseManager;
-//    private PurchaseRepository purchaseRepository;
-//
-//    // Klienci i przedmioty
-//    private Client client1;
-//    private Client client2;
-//    private Item item1;
-//    private Item item2;
-//
-//    @BeforeAll
-//    static void setup() {
-//        emf = Persistence.createEntityManagerFactory("default");
-//        em = emf.createEntityManager();
-//    }
-//
-//    @BeforeEach
-//    void init() {
-//        purchaseRepository = new PurchaseRepository(em);
-//        purchaseManager = new PurchaseManager(em);
-//
-//        em.getTransaction().begin();
-//
-//        // Tworzenie klientów
-//        client1 = new IndividualClient("Jan", "Kowalski", "12345678910", "Warszawa");
-//        client2 = new IndividualClient("Anna", "Nowak", "98765432110", "Kraków");
-//        em.persist(client1);
-//        em.persist(client2);
-//
-//        // Tworzenie przedmiotów
-//        item1 = new Item("Laptop", 3000.0, "ITEM001", true);
-//        item2 = new Item("Smartphone", 1500.0, "ITEM002", true);
-//        em.persist(item1);
-//        em.persist(item2);
-//
-//        em.getTransaction().commit();
-//    }
-//
-//    @Test
-//    void testRegisterPurchase() {
-//        em.getTransaction().begin();
-//
-//        // Rejestracja nowego zakupu dla klienta 1
-//        Set<Item> items = Set.of(item1, item2);
-//        Purchase purchase = purchaseManager.registerPurchase(client1, items, true);
-//
-//        assertNotNull(purchase.getId());
-//        assertEquals(2, purchase.getItems().size());
-//        assertTrue(purchase.isPending());
-//
-//        em.getTransaction().commit();
-//
-//        // Sprawdzamy, czy zakup został zapisany do bazy danych
-//        Purchase foundPurchase = purchaseRepository.findById(purchase.getId());
-//        assertNotNull(foundPurchase);
-//    }
-//
-//    @Test
-//    void testUpdatePurchase() {
-//        em.getTransaction().begin();
-//
-//        // Rejestracja nowego zakupu dla klienta 1
-//        Set<Item> items = Set.of(item1);
-//        Purchase purchase = purchaseManager.registerPurchase(client1, items, true);
-//
-//        em.getTransaction().commit();
-//
-//        // Aktualizacja zakupu
-//        em.getTransaction().begin();
-//        Set<Item> newItems = new HashSet<>(purchase.getItems());
-//        newItems.add(item2); // Dodajemy nowy przedmiot
-//        purchaseManager.updatePurchase(purchase.getId(), newItems, false);
-//        em.getTransaction().commit();
-//
-//        // Sprawdzamy, czy zakup został zaktualizowany
-//        em.getTransaction().begin();
-//        Purchase updatedPurchase = purchaseRepository.findById(purchase.getId());
-//        assertEquals(2, updatedPurchase.getItems().size());
-//        assertFalse(updatedPurchase.isPending());
-//        em.getTransaction().commit();
-//    }
-//
-//
-//    @Test
-//    void testRemovePurchase() {
-//        em.getTransaction().begin();
-//
-//        // Rejestracja nowego zakupu dla klienta 1
-//        Set<Item> items = Set.of(item1);
-//        Purchase purchase = purchaseManager.registerPurchase(client1, items, true);
-//
-//        em.getTransaction().commit();
-//
-//        // Usuwamy zakup
-//        em.getTransaction().begin();
-//        purchaseManager.removePurchase(purchase.getId());
-//        em.getTransaction().commit();
-//
-//        // Sprawdzamy, czy zakup został usunięty
-//        em.getTransaction().begin();
-//        Purchase removedPurchase = purchaseRepository.findById(purchase.getId());
-//        assertNull(removedPurchase);
-//        em.getTransaction().commit();
-//    }
-//
-//    @AfterEach
-//
-//
-//    @AfterAll
-//    static void tearDown() {
-//        if (emf != null) {
-//            emf.close();
-//        }
-//    }
-//}
+package tests;
+
+import manager.ItemManager;
+import manager.PurchaseManager;
+
+import model.Purchase;
+import org.bson.types.ObjectId;
+import org.junit.jupiter.api.*;
+import repository.ItemRepository;
+import repository.PurchaseRepository;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class PurchaseManagerTest {
+
+    private PurchaseManager purchaseManager;
+    private ItemManager itemManager;
+
+    @BeforeAll
+    public void setUp() {
+        PurchaseRepository purchaseRepository = new PurchaseRepository();
+        itemManager = new ItemManager(new ItemRepository());
+        purchaseManager = new PurchaseManager(purchaseRepository, itemManager);
+    }
+
+    @BeforeEach
+    public void cleanDatabase() {
+        purchaseManager.getDatabase().drop();
+    }
+
+    @Test
+    public void testSavePurchase() {
+        ObjectId id = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId = new ObjectId();
+        itemManager.registerItem(itemId ,"Test Item", 50, "what", true);
+        purchaseManager.registerPurchase(id, clientId, itemId, 10, 100.50);
+
+        List<Purchase> purchases = purchaseManager.getAllPurchases();
+        assertFalse(purchases.isEmpty(), "The purchase collection should not be empty.");
+
+        Purchase retrievedPurchase = purchases.getFirst();
+        assertEquals(clientId, retrievedPurchase.getClientId());
+        assertEquals(itemId, retrievedPurchase.getItemId());
+        assertEquals(10, retrievedPurchase.getAmount(), "Amount should match.");
+        assertEquals(100.50, retrievedPurchase.getTotalCost(), "Total cost should match.");
+    }
+
+    @Test
+    public void testSavePurchaseNegative() {
+        ObjectId id1 = new ObjectId();
+        ObjectId id2 = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId = new ObjectId();
+        assertThrows(IllegalArgumentException.class, () -> purchaseManager.registerPurchase(id1, clientId, itemId, -10, 100.50));
+        assertThrows(IllegalArgumentException.class, () -> purchaseManager.registerPurchase(id2, clientId, itemId, 10, -100.50));
+    }
+
+    @Test
+    public void testFindById() {
+        ObjectId id = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId = new ObjectId();
+        itemManager.registerItem(itemId ,"Test Item", 50, "what", true);
+        purchaseManager.registerPurchase(id, clientId, itemId, 5, 50.25);
+
+        List<Purchase> purchases = purchaseManager.getAllPurchases();
+        assertEquals(1, purchases.size());
+
+        Purchase retrievedPurchase = purchaseManager.getPurchaseById(id);
+        assertNotNull(retrievedPurchase);
+        assertEquals(clientId, retrievedPurchase.getClientId());
+        assertEquals(itemId, retrievedPurchase.getItemId());
+        assertEquals(5, retrievedPurchase.getAmount());
+        assertEquals(50.25, retrievedPurchase.getTotalCost());
+    }
+
+    @Test
+    public void testDeletePurchase() {
+        ObjectId id = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId = new ObjectId();
+        itemManager.registerItem(itemId ,"Test Item", 50, "what", true);
+        purchaseManager.registerPurchase(id, clientId, itemId, 3, 30.99);
+
+        List<Purchase> purchases = purchaseManager.getAllPurchases();
+        assertFalse(purchases.isEmpty());
+
+        purchaseManager.deletePurchase(id);
+
+        Purchase deletedPurchase = purchaseManager.getPurchaseById(id);
+        assertNull(deletedPurchase);
+    }
+
+    @Test
+    public void testFindAllPurchases() {
+        ObjectId id1 = new ObjectId();
+        ObjectId id2 = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId1 = new ObjectId();
+        ObjectId itemId2 = new ObjectId();
+        itemManager.registerItem(itemId1 ,"Test Item1", 50, "what", true);
+        itemManager.registerItem(itemId2 ,"Test Item2", 50, "what", true);
+
+        purchaseManager.registerPurchase(id1, clientId, itemId1, 2, 20.99);
+        purchaseManager.registerPurchase(id2, clientId, itemId2, 4, 40.99);
+
+        List<Purchase> purchases = purchaseManager.getAllPurchases();
+        assertTrue(purchases.size() >= 2);
+    }
+
+    @Test
+    public void testRegisterPurchaseWithUnavailableItem() {
+        ObjectId id = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId = new ObjectId();
+        itemManager.registerItem(itemId ,"Unavailable Item", 50, "what", false);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            purchaseManager.registerPurchase(id, clientId, itemId, 1, 100.0);
+        });
+
+        assertEquals("Item must be available for purchase", exception.getMessage());
+    }
+}
