@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import manager.ItemManager;
 import model.Item;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.*;
 import repository.ItemRepository;
 
@@ -27,8 +28,8 @@ class ItemManagerTest {
 
     @BeforeEach
     void init() {
-        itemRepository = new ItemRepository(em);
-        itemManager = new ItemManager(em);
+        itemRepository = new ItemRepository();
+        itemManager = new ItemManager(itemRepository);
     }
 
     @Test
@@ -49,9 +50,9 @@ class ItemManagerTest {
     void testGetItemByItemID() {
         em.getTransaction().begin();
 
-        itemManager.registerItem("Smartphone", 800.0, "ITEM002", true);
+        itemManager.registerItem(new ObjectId(),"Smartphone", 800.0, "ITEM002", true);
 
-        List<Item> foundItems = itemManager.getItemByItemID("ITEM002");
+        List<Item> foundItems = itemManager.getItemByItemID();
         assertFalse(foundItems.isEmpty());
         assertEquals("Smartphone", foundItems.getFirst().getItemName());
 
@@ -65,7 +66,7 @@ class ItemManagerTest {
         // Korzystamy z ItemType jako enum
         Item item = itemManager.registerItem("Tablet", 500.0, "ITEM003", true);
 
-        itemManager.updateItemCost(item.getId(), 600.0);
+        itemManager.updateItemCost(item, 600.0);
         List<Item> updatedItems = itemManager.getItemByItemID("ITEM003");
         assertEquals(600.0, updatedItems.getFirst().getItemCost());
 
@@ -94,7 +95,7 @@ class ItemManagerTest {
         Item item = itemManager.registerItem("Laptop", 1000.0, "ITEM001", true);
 
         // Kupowanie przedmiotu (ustawiamy dostępność na false)
-        itemManager.buyItem(item.getId());
+        itemManager.buyItem(item);
         em.getTransaction().commit();
 
         em.getTransaction().begin();
@@ -115,7 +116,8 @@ class ItemManagerTest {
         // Próba kupienia przedmiotu, który jest już niedostępny
         em.getTransaction().begin();
         assertThrows(IllegalStateException.class, () -> {
-            itemManager.buyItem(item.getId());
+            itemManager.buyItem(item);
+
         });
         em.getTransaction().rollback();
     }

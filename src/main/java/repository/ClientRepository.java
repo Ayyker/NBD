@@ -1,43 +1,54 @@
 package repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+import com.mongodb.client.MongoCollection;
+
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import model.Client;
 
+import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class ClientRepository {
-    @PersistenceContext
-    private final EntityManager entityManager;
+import static com.mongodb.client.model.Filters.eq;
 
-    public ClientRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
+
+public class ClientRepository extends AbstractMongoRepository {
+
+    private final MongoCollection<Client> clientCollection;
+
+    public ClientRepository() {
+        initDbConnection();
+        MongoDatabase database = getDatabase();
+        clientCollection = database.getCollection("clients", Client.class);
     }
 
-    @Transactional
-    public Client saveOrUpdate(Client client) {
+    public void saveOrUpdate(Client client) {
         if (client.getId() == null) {
-            entityManager.persist(client);
+            client.setId(new ObjectId());
+            clientCollection.insertOne(client);
         } else {
-            entityManager.merge(client);
+            clientCollection.replaceOne(eq("_id", client.getId()), client);
         }
-        return client;
-    }
-
-    public Client findById(Long id) {
-        return entityManager.find(Client.class, id);
     }
 
     public List<Client> findAll() {
-        return entityManager.createQuery("SELECT c FROM Client c", Client.class).getResultList();
+        List<Client> clients = new ArrayList<>();
+        clientCollection.find().into(clients);
+        return clients;
     }
 
-    @Transactional
-    public void deleteById(Long id) {
-        Client client = findById(id);
-        if (client != null) {
-            entityManager.remove(client);
-        }
+    public Client findById(ObjectId id) {
+        return clientCollection.find(Filters.eq("_id", id)).first();
+    }
+
+    public boolean deleteById(ObjectId id) {
+        return clientCollection.deleteOne(eq("_id", id)).wasAcknowledged();
+    }
+
+    @Override
+    public void close() throws Exception {
+        closeConnection();
     }
 }

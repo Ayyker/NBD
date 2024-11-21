@@ -4,10 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="first tests">
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="LECIMY Z KOKSEM">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/ClientValidation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Purchase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/AbstractMongoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractMongoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" afterDir="false" />
+    </list>
+    <list id="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" name="Changes by Lenovo" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +60,26 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/org/mongodb/bson/5.1.1/bson-5.1.1-sources.jar!/org/bson/codecs/jsr310/DateTimeBasedCodec.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/DockerFiles/docker-compose.yml" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/manager/ClientManager.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/repository/AbstractMongoRepository.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java">
+      <ranges>
+        <range start1="7" end1="7" start2="7" end2="8" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
+        <range start1="29" end1="31" start2="30" end2="32" changelist="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" />
+        <range start1="51" end1="52" start2="52" end2="53" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
+        <range start1="53" end1="54" start2="54" end2="55" changelist="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" />
+        <range start1="67" end1="68" start2="68" end2="69" changelist="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" />
+        <range start1="96" end1="97" start2="97" end2="98" changelist="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" />
+        <range start1="117" end1="118" start2="118" end2="120" changelist="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" />
+      </ranges>
+    </file>
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -68,56 +98,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.DockerFiles: Compose Deployment.executor": "Run",
-    "JUnit.ClientManagerTest.executor": "Run",
-    "JUnit.ClientManagerTest.testGetAllClients.executor": "Run",
-    "JUnit.ItemManagerTest.executor": "Run",
-    "JUnit.ItemManagerTest.testBuyItem_AlreadyUnavailable.executor": "Run",
-    "JUnit.ItemManagerTest.testGetItemByItemID.executor": "Run",
-    "JUnit.ItemManagerTest.testOptimisticLockingOnItemBuy.executor": "Run",
-    "JUnit.ItemManagerTest.testRegisterItem.executor": "Run",
-    "JUnit.ItemManagerTest.testUpdateItemCost.executor": "Run",
-    "JUnit.PurchaseManagerTest.executor": "Run",
-    "JUnit.PurchaseManagerTest.testAddItemsToPurchase.executor": "Run",
-    "JUnit.PurchaseManagerTest.testGetPurchasesByItem.executor": "Run",
-    "JUnit.PurchaseManagerTest.testRegisterPurchase.executor": "Run",
-    "JUnit.PurchaseManagerTest.testUpdatePurchase.executor": "Run",
-    "JUnit.tests in ORM.executor": "Run",
-    "Maven.ORM [clean].executor": "Run",
-    "Maven.ORM [compile].executor": "Run",
-    "Maven.ORM [dependency:purge-local-repository].executor": "Run",
-    "Maven.ORM [dependency:resolve].executor": "Run",
-    "Maven.ORM [install].executor": "Run",
-    "Maven.ORM [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "Maven.ORM [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor": "Run",
-    "Maven.ORM [site].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "mongoDB",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/niko2/Desktop/NBD-mongoDB",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.general",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.DockerFiles: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientManagerTest.testGetAllClients.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testBuyItem_AlreadyUnavailable.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testGetItemByItemID.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testOptimisticLockingOnItemBuy.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testRegisterItem.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testUpdateItemCost.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testAddItemsToPurchase.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testGetPurchasesByItem.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testRegisterPurchase.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testUpdatePurchase.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.tests in ORM.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [dependency:purge-local-repository].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [dependency:resolve].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [site].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mongoDB&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/niko2/Desktop/NBD-mongoDB&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql",
-      "mongo"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;,
+      &quot;mongo&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\niko2\Desktop\Studia\semestr5\nbd\ORM\DockerFiles" />
@@ -211,7 +241,9 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml" />
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -248,7 +280,8 @@
       <workItem from="1732056467669" duration="731000" />
       <workItem from="1732107571238" duration="1173000" />
       <workItem from="1732108758809" duration="193000" />
-      <workItem from="1732115406960" duration="2272000" />
+      <workItem from="1732115406960" duration="18592000" />
+      <workItem from="1732184794009" duration="1522000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -290,7 +323,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732108692419</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="LECIMY Z KOKSEM">
+      <option name="closed" value="true" />
+      <created>1732117709231</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732117709231</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +344,8 @@
     <MESSAGE value="First and last commit" />
     <MESSAGE value="Cleanup before mongoDB" />
     <MESSAGE value="first tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="first tests" />
+    <MESSAGE value="LECIMY Z KOKSEM" />
+    <option name="LAST_COMMIT_MESSAGE" value="LECIMY Z KOKSEM" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

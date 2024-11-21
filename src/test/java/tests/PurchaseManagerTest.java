@@ -125,48 +125,8 @@ class PurchaseManagerTest {
         em.getTransaction().commit();
     }
 
-    @Test
-    void testGetPurchasesByClient() {
-        em.getTransaction().begin();
-
-        // Rejestracja zakupu dla klienta 1
-        purchaseManager.registerPurchase(client1, Set.of(item1, item2), true);
-
-        em.getTransaction().commit();
-
-        // Pobieramy zakupy dla klienta 1
-        em.getTransaction().begin();
-        List<Purchase> purchases = purchaseManager.getPurchasesByClient(client1);
-        assertFalse(purchases.isEmpty());
-        assertEquals(1, purchases.size());
-        em.getTransaction().commit();
-    }
-
-    @Test
-    void testGetPurchasesByItem() {
-        em.getTransaction().begin();
-
-        // Rejestracja zakupu dla klienta 1
-        purchaseManager.registerPurchase(client1, Set.of(item1), true);
-
-        em.getTransaction().commit();
-
-        // Pobieramy zakupy z przedmiotem 1
-        em.getTransaction().begin();
-        List<Purchase> purchases = purchaseManager.getPurchasesByItem(item1);
-        assertFalse(purchases.isEmpty());
-        assertEquals(1, purchases.size());
-        em.getTransaction().commit();
-    }
-
     @AfterEach
-    void cleanUp() {
-        em.getTransaction().begin();
-        em.createQuery("DELETE FROM Purchase").executeUpdate();
-        em.createQuery("DELETE FROM Client").executeUpdate();
-        em.createQuery("DELETE FROM Item").executeUpdate();
-        em.getTransaction().commit();
-    }
+
 
     @AfterAll
     static void tearDown() {

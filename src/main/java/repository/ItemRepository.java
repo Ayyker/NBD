@@ -1,85 +1,53 @@
 package repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.LockModeType;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import model.Item;
+import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ItemRepository {
+import static com.mongodb.client.model.Filters.eq;
 
-    @PersistenceContext
-    private final EntityManager entityManager;
-    public ItemRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
+public class ItemRepository extends AbstractMongoRepository{
+
+    private final MongoCollection<Item> itemCollection;
+
+    public ItemRepository() {
+        initDbConnection();
+        MongoDatabase database = getDatabase();
+        itemCollection = database.getCollection("items", Item.class);
     }
 
-    public Item findById(Long id) {
-        return entityManager.find(Item.class, id);
-    }
-
-    @Transactional
-    public List<Item> findByItemID(String itemID) {
-        return entityManager.createQuery(
-                        "SELECT i FROM Item i WHERE i.itemID = :itemID", Item.class)
-                .setParameter("itemID", itemID)
-                .setLockMode(LockModeType.OPTIMISTIC)
-                .getResultList();
-    }
-
-    @Transactional
-    public List<Item> findByAvailable(boolean available) {
-        return entityManager.createQuery(
-                        "SELECT i FROM Item i WHERE i.available = :available", Item.class)
-                .setParameter("available", available)
-                .setLockMode(LockModeType.OPTIMISTIC)
-                .getResultList();
-    }
-
-    // Aktualizacja kosztu przedmiotu z blokadą optymistyczną
-    @Transactional
-    public void updateItemCost(Long id, double itemCost) {
-        Item item = entityManager.find(Item.class, id, LockModeType.OPTIMISTIC);  // Blokada optymistyczna
-        if (item != null) {
-            item.setItemCost(itemCost);
-            entityManager.merge(item);  // Aktualizacja z zarządzaniem wersją
-            entityManager.flush();  // Wymuszenie natychmiastowego zapisu
-        }
-    }
-
-    @Transactional
     public void saveOrUpdate(Item item) {
         if (item.getId() == null) {
-            entityManager.persist(item);
+            item.setId(new ObjectId());
+            itemCollection.insertOne(item);
         } else {
-            entityManager.merge(item);
+            itemCollection.replaceOne(eq("_id", item.getId()), item);
         }
-        entityManager.flush();
     }
 
-    @Transactional
-    public void delete(Item item) {
-        if (entityManager.contains(item)) {
-            entityManager.remove(item);
-        } else {
-            Item attachedItem = entityManager.find(Item.class, item.getId());
-            if (attachedItem != null) {
-                entityManager.remove(attachedItem);
-            }
+    public List<Item> findAll() {
+        List<Item> items = new ArrayList<>();
+        for (Item item : itemCollection.find()) {
+            items.add(item);
         }
-        entityManager.flush();
+        return items;
     }
 
-    public void buyItem(Long id) {
-        Item item = entityManager.find(Item.class, id, LockModeType.OPTIMISTIC);
-        if (item != null) {
-            if (!item.isAvailable()) {
-                throw new IllegalStateException("Item is not available for purchase.");
-            }
-            item.setAvailable(false);
-            entityManager.merge(item);
-        }
+    public Item findById(ObjectId id) {
+        return itemCollection.find(Filters.eq("_id", id)).first();
+    }
+
+    public void delete(ObjectId id) {
+        itemCollection.deleteOne(Filters.eq("_id", id));
+    }
+
+    @Override
+    public void close() throws Exception {
+        closeConnection();
     }
 }

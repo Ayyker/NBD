@@ -1,42 +1,45 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
-@Entity
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("INDIVIDUAL")
-@Table(name = "individual_clients")
+@BsonDiscriminator(key = "type", value = "INDIVIDUAL")
 public class IndividualClient extends Client {
 
-    @Column(name = "first_name", nullable = false, length = 50)
+    @BsonProperty("first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false, length = 50)
+    @BsonProperty("last_name")
     private String lastName;
 
-    @Column(nullable = false, unique = true, length = 11)
+    @BsonProperty("pesel")
     private String pesel;
 
-    public IndividualClient(String firstName, String lastName, String pesel, String address) {
-        super(pesel, address);  // Wywołanie konstruktora klasy bazowej
+    @BsonCreator
+    public IndividualClient(@BsonProperty("_id") ObjectId id,
+                            @BsonProperty("first_name") String firstName,
+                            @BsonProperty("last_name") String lastName,
+                            @BsonProperty("personal_id") String personalID,
+                            @BsonProperty("address") String address) {
+        super(id, personalID, address);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.pesel = pesel;
+        this.pesel = personalID;
     }
+
 
     @Override
     public double getDiscount() {
-        return 0.0;  // Klienci indywidualni nie mają zniżki
+        // Implementacja specyficzna dla klienta indywidualnego
+        return 0.1; // Na przykład stały rabat 10%
     }
 
     @Override

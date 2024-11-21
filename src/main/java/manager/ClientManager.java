@@ -1,9 +1,9 @@
 package manager;
 
-import jakarta.persistence.EntityManager;
 import model.BusinessClient;
 import model.Client;
 import model.IndividualClient;
+import org.bson.types.ObjectId;
 import repository.ClientRepository;
 
 import java.util.List;
@@ -12,22 +12,23 @@ public class ClientManager {
 
     private final ClientRepository clientsRepository;
 
-    public ClientManager(EntityManager em) {
-        this.clientsRepository = new ClientRepository(em);
+    public ClientManager(ClientRepository clientsRepository) {
+        this.clientsRepository = clientsRepository;
     }
 
-    public Client getClient(Long id) {
+
+    public Client getClient(ObjectId id) {
         return clientsRepository.findById(id);
     }
 
-    public IndividualClient registerIndividualClient(String firstName, String lastName, String pesel, String address) {
-        IndividualClient individualClient = new IndividualClient(firstName, lastName, pesel, address);
+    public IndividualClient registerIndividualClient(ObjectId id,String firstName, String lastName, String pesel, String address) {
+        IndividualClient individualClient = new IndividualClient(id, firstName, lastName, pesel, address);
         clientsRepository.saveOrUpdate(individualClient);
         return individualClient;
     }
 
-    public BusinessClient registerBusinessClient(String companyName, String nip, String address, double discount) {
-        BusinessClient businessClient = new BusinessClient(companyName, nip, address, discount);
+    public BusinessClient registerBusinessClient(ObjectId id, String companyName, String nip, String address, double discount) {
+        BusinessClient businessClient = new BusinessClient(id, companyName, nip, address, discount);
         clientsRepository.saveOrUpdate(businessClient);
         return businessClient;
     }
@@ -36,11 +37,11 @@ public class ClientManager {
         return clientsRepository.findAll();
     }
 
-    public void removeClient(Long id) {
+    public void removeClient(ObjectId id) {
         clientsRepository.deleteById(id);
     }
 
-    public void updateClient(Long id, String newAddress, String newNameOrFirstName, String newNipOrLastName) {
+    public void updateClient(ObjectId id, String newAddress, String newNameOrFirstName, String newNipOrLastName) {
         Client client = clientsRepository.findById(id);
 
         if (client == null) {
@@ -57,7 +58,6 @@ public class ClientManager {
             businessClient.setNipID(newNipOrLastName);
         }
 
-        // Zapisujemy zaktualizowanego klienta
         clientsRepository.saveOrUpdate(client);
     }
 }

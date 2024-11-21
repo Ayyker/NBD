@@ -1,50 +1,58 @@
 package manager;
 
-import jakarta.persistence.EntityManager;
 import model.Item;
+import org.bson.types.ObjectId;
 import repository.ItemRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemManager {
 
     private final ItemRepository itemRepository;
 
-    public ItemManager(EntityManager em) {
-        this.itemRepository = new ItemRepository(em);
+    public ItemManager(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
     }
 
-    public List<Item> getItemByItemID(String itemID) {
-        return itemRepository.findByItemID(itemID);  // Korzystanie z metody findByItemID
+    public Item getItemByID(ObjectId id) {
+        return itemRepository.findById(id);
     }
 
-    public Item registerItem(String name, double cost, String itemID, boolean available) {
-        Item item = new Item(name, cost, itemID, available);
+    public Item registerItem(ObjectId id, String name, double cost, String itemID, boolean available) {
+        Item item = new Item(id, itemID, name, cost, available);
         itemRepository.saveOrUpdate(item);
         return item;
     }
 
     public List<Item> getAvailableItems(boolean available) {
-        return itemRepository.findByAvailable(available);
+        List<Item> items = itemRepository.findAll();
+        List<Item> avaibleItems = new ArrayList<>();
+        for (Item item : items) {
+            if (item.isAvailable() != available) {
+                avaibleItems.add(item);
+            }
+        }
+        return avaibleItems;
     }
 
-    public void updateItemCost(Long id, double itemCost) {
-        itemRepository.updateItemCost(id, itemCost);
+    public void updateItemCost(Item item, double itemCost) {
+       item.setItemCost(itemCost);
+        itemRepository.saveOrUpdate(item);
     }
 
     public void removeItem(Item item) {
-        itemRepository.delete(item);
+        itemRepository.delete(item.getId());
     }
 
-    public void buyItem(Long id) {
-        itemRepository.buyItem(id);
+    public void buyItem(Item item) {
+        item.setAvailable(false);
+        itemRepository.saveOrUpdate(item);
     }
 
-    public void updateItem(Long id, String newName, double newCost, boolean newAvailability) {
-        Item item = itemRepository.findById(id);
-
+    public void updateItem(Item item, String newName, double newCost, boolean newAvailability) {
         if (item == null) {
-            throw new IllegalArgumentException("Item with ID " + id + " does not exist.");
+            throw new IllegalArgumentException("Item with given ID does not exist.");
         }
 
         item.setItemName(newName);

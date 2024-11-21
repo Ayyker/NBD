@@ -1,49 +1,45 @@
 package model;
 
-import jakarta.persistence.*;
-import lombok.*;
-import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.types.ObjectId;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.codecs.pojo.annotations.BsonIgnore;
 
-import java.time.LocalDateTime;
-
-@Entity
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "client_type")
-@Table(name = "clients")
+@NoArgsConstructor
 public abstract class Client {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @BsonId
+    @BsonProperty("_id")
+    private ObjectId id;
 
-    @Version
-    private long version;
-
-    @Column(name = "created_date", nullable = false)
-    private LocalDateTime createdDate;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdDate = LocalDateTime.now();
-    }
-
-    @Column(name = "personal_id", nullable = false, unique = true, length = 20)
-    @NotNull(message = "Personal ID cannot be null")
-    @Pattern(regexp = "\\d{11}|\\w{10,20}", message = "Personal ID must be either 11 digits (PESEL) or valid NIP/ID format")
+    @BsonProperty("personal_id")
     private String personalID;
 
-    @Column(name = "address", nullable = false)
+    @BsonProperty("address")
     private String address;
 
-    public Client() {}
 
     public Client(String personalID, String address) {
         this.personalID = personalID;
         this.address = address;
     }
 
+    @BsonCreator
+    public Client(@BsonProperty("_id") ObjectId id,
+                  @BsonProperty("personal_id") String personalID,
+                  @BsonProperty("address") String address) {
+        this.id = id;
+        this.personalID = personalID;
+        this.address = address;
+    }
+
+    @BsonIgnore
     public abstract double getDiscount();
 
     @Override

@@ -1,59 +1,52 @@
 package model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
-import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "purchases")
-public class Purchase{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Builder
+@BsonDiscriminator
+public class Purchase {
 
-    @Version
-    private long version;
+    @BsonId
+    @BsonProperty("_id")
+    private ObjectId id;
 
-    @Column(name = "created_date", nullable = false)
-    private LocalDateTime createdDate;
+    @BsonProperty("client_id")
+    private ObjectId clientId;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdDate = LocalDateTime.now();
-    }
+    @BsonProperty("item_ids")
+    private List<ObjectId> itemIds;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    @BsonProperty("total_cost")
+    private double totalCost;
 
-    @ManyToMany
-    @JoinTable(
-            name = "purchase_items",  // Tabela łącząca
-            joinColumns = @JoinColumn(name = "purchase_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
-    private Set<Item> items;
-
-    @Column(nullable = false)
-    private boolean pending;
-
-    public double getFinalCost() {
-        return items.stream().mapToDouble(Item::getItemCost).sum() * client.getDiscount();
+    @BsonCreator
+    public Purchase(@BsonProperty("_id") ObjectId id,
+                    @BsonProperty("client_id") ObjectId clientId,
+                    @BsonProperty("item_ids") List<ObjectId> itemIds,
+                    @BsonProperty("total_cost") double totalCost) {
+        this.id = id;
+        this.clientId = clientId;
+        this.itemIds = itemIds;
+        this.totalCost = totalCost;
     }
 
     @Override
     public String toString() {
         return "Purchase{" +
                 "id=" + id +
-                ", client=" + client +
-                ", items=" + items +
-                ", version=" + version +
+                ", clientId=" + clientId +
+                ", itemIds=" + itemIds +
+                ", totalCost=" + totalCost +
                 '}';
     }
 }

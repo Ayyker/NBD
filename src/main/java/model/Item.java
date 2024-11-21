@@ -1,56 +1,44 @@
 package model;
 
-import jakarta.persistence.*;
 import lombok.*;
-import jakarta.validation.constraints.*;
-import java.time.LocalDateTime;
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
-@Entity
+
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
-@Table(name = "items", indexes = {
-        @Index(name = "idx_item_name", columnList = "item_name")
-})
-
 public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Version
-    private long version;
+    @BsonId
+    @BsonProperty("_id")
+    private ObjectId id;
 
-    @Column(name = "created_date", nullable = false)
-    private LocalDateTime createdDate;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdDate = LocalDateTime.now();
-    }
-
-    @Column(name = "item_id", nullable = false, unique = true, length = 50)
-    @NotNull(message = "Item ID cannot be null")
+    @BsonProperty("item_id")
     private String itemID;
 
-    @Column(name = "item_name", nullable = false, length = 100)
-    @NotNull(message = "Item name cannot be null")
-    @Size(max = 100, message = "Item name cannot exceed 100 characters")
+    @BsonProperty("item_name")
     private String itemName;
 
-    @Column(name = "item_cost", nullable = false)
-    @Min(value = 0, message = "Item cost must be a positive value")
+    @BsonProperty("item_cost")
     private double itemCost;
 
-    @Column(nullable = false)
+    @BsonProperty("available")
     private boolean available;
 
-    public Item(String name, double cost, String itemID, boolean available) {
+    @BsonCreator
+    public Item(@BsonProperty("id") ObjectId id,
+                @BsonProperty("item_id") String itemID,
+                @BsonProperty("item_name") String itemName,
+                @BsonProperty("item_cost") double itemCost,
+                @BsonProperty("available") boolean available) {
+        this.id = id;
         this.itemID = itemID;
-        this.itemName = name;
-        this.itemCost = cost;
+        this.itemName = itemName;
+        this.itemCost = itemCost;
         this.available = available;
     }
 

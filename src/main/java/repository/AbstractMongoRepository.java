@@ -4,6 +4,8 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.*;
+import com.mongodb.client.model.CreateCollectionOptions;
+import model.ClientValidation;
 import org.bson.UuidRepresentation;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -29,20 +31,43 @@ public abstract class AbstractMongoRepository implements AutoCloseable{
     private MongoClient mongoClient;
     private MongoDatabase onlineShopDB;
 
-    private void initDbConnection() {
+    protected void initDbConnection() {
         MongoClientSettings settings = MongoClientSettings.builder()
                 .credential(credential)
                 .applyConnectionString(connectionString)
                 .uuidRepresentation(UuidRepresentation.STANDARD)
                 .codecRegistry(CodecRegistries.fromRegistries(
-                        CodecRegistries.fromProviders(new UniqueIdCodecProvider()),
                         MongoClientSettings.getDefaultCodecRegistry(),
                         pojoCodecRegistry
                 ))
                 .build();
 
         mongoClient = MongoClients.create(settings);
-        onlineShopDB = mongoClient.getDatabase("rentacar");
+        onlineShopDB = mongoClient.getDatabase("onlineShop");
+
+        if (!collectionExist("clients")) {
+            onlineShopDB.createCollection("clients", new CreateCollectionOptions().validationOptions(ClientValidation.options));
+        }
+    }
+    public boolean collectionExist(String collectionName) {
+        for (String existingCollectionName : onlineShopDB.listCollectionNames()) {
+            if (existingCollectionName.equals(collectionName))
+                return true;
+        }
+        return false;
     }
 
+    public MongoDatabase getDatabase() {
+        return onlineShopDB;
+    }
+
+    public MongoClient getClient() {
+        return mongoClient;
+    }
+
+    protected void closeConnection() {
+        if (mongoClient != null) {
+            mongoClient.close();
+        }
+    }
 }

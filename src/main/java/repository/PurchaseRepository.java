@@ -1,66 +1,53 @@
 package repository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.LockModeType;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
-import model.Client;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import org.bson.types.ObjectId;
 import model.Purchase;
-import model.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseRepository {
-    @PersistenceContext
-    private final EntityManager entityManager;
+import static com.mongodb.client.model.Filters.eq;
 
-    public PurchaseRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
+public class PurchaseRepository extends AbstractMongoRepository {
+
+    private final MongoCollection<Purchase> purchaseCollection;
+
+    public PurchaseRepository() {
+        initDbConnection();
+        MongoDatabase database = getDatabase();
+        purchaseCollection = database.getCollection("purchase", Purchase.class);
     }
 
-    public Purchase findById(Long id) {
-        return entityManager.find(Purchase.class, id);
-    }
-
-
-    public List<Purchase> findByItems(Item item) {
-        return entityManager.createQuery(
-                        "SELECT p FROM Purchase p JOIN p.items i WHERE i = :item", Purchase.class)
-                .setParameter("item", item)
-                .getResultList();
-    }
-
-    public List<Purchase> findByItemsIn(List<Item> items) {
-        return entityManager.createQuery(
-                        "SELECT p FROM Purchase p JOIN p.items i WHERE i IN :items", Purchase.class)
-                .setParameter("items", items)
-                .getResultList();
-    }
-
-
-    public List<Purchase> findByCustomer(Client client) {
-        return entityManager.createQuery(
-                        "SELECT p FROM Purchase p WHERE p.client = :client", Purchase.class)
-                .setParameter("client", client)
-                .getResultList();
-    }
-
-    @Transactional
     public void saveOrUpdate(Purchase purchase) {
         if (purchase.getId() == null) {
-            entityManager.persist(purchase);
+            purchase.setId(new ObjectId());
+            purchaseCollection.insertOne(purchase);
         } else {
-            entityManager.find(Purchase.class, purchase.getId(), LockModeType.OPTIMISTIC); // Dodana blokada optymistyczna
-            entityManager.merge(purchase);
+            purchaseCollection.replaceOne(eq("_id", purchase.getId()), purchase);
         }
     }
 
-    @Transactional
-    public void delete(Purchase purchase) {
-        Purchase attachedPurchase = entityManager.find(Purchase.class, purchase.getId());
-        if (attachedPurchase != null) {
-            entityManager.remove(attachedPurchase);
+    public List<Purchase> findAll() {
+        List<Purchase> purchases = new ArrayList<>();
+        for (Purchase purchase : purchaseCollection.find()) {
+            purchases.add(purchase);
         }
+        return purchases;
     }
 
+    public Purchase findById(ObjectId id) {
+        return purchaseCollection.find(Filters.eq("_id", id)).first();
+    }
+
+    public void delete(ObjectId id) {
+        purchaseCollection.deleteOne(Filters.eq("_id", id));
+    }
+
+    @Override
+    public void close() throws Exception {
+        closeConnection();
+    }
 }

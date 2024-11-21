@@ -1,34 +1,35 @@
 package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
-@Entity
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("BUSINESS")
-@Table(name = "business_clients")
+@BsonDiscriminator(key = "type", value = "BUSINESS")
 public class BusinessClient extends Client {
 
-    @Column(name = "company_name", nullable = false, length = 100)
+    @BsonProperty("company_name")
     private String companyName;
 
-    @Column(name = "nip_id", nullable = false, length = 15, unique = true)
+    @BsonProperty("nip_id")
     private String nipID;
 
-    @Column(nullable = false)
+    @BsonProperty("discount")
     private double discount;
 
-    public BusinessClient(String companyName, String nipID, String address, double discount) {
-        super(nipID, address);
+    @BsonCreator
+    public BusinessClient(@BsonProperty("_id") ObjectId id,
+                          @BsonProperty("company_name") String companyName,
+                          @BsonProperty("nip_id") String nipID,
+                          @BsonProperty("address") String address,
+                          @BsonProperty("discount") double discount) {
+        super(id, nipID, address);
         this.companyName = companyName;
         this.nipID = nipID;
         this.discount = discount;
