@@ -30,7 +30,7 @@ class PurchaseManagerTest {
     @BeforeEach
     public void cleanDatabase() {
         purchaseManager.getDatabase().drop(); // Clean MongoDB
-        purchaseManager.getPurchaseByIdRedis(null); // Clean Redis (Optional)
+        //purchaseManager.getPurchaseByIdRedis(null); // Clean Redis (Optional)
     }
 
     @Test

@@ -4,26 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="CO TY TUTAJ ROBISZ?">
-      <change afterPath="$PROJECT_DIR$/src/main/java/benchmarks/BaseBenchmark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/benchmarks/MongoDBBenchmark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/benchmarks/RedisBenchmark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/PurchaseJsonb.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractRedisRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepoJsonb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Purchase.java" afterDir="false" />
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="RedisPush">
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" afterDir="false" />
     </list>
     <list id="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" name="Changes by Lenovo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ORM" />
+        <entry key="$PROJECT_DIR$" value="mongoDB" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -121,7 +104,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "mongoDB",
+    "git-widget-placeholder": "Redis",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/niko2/Desktop/NBD-1.1.2",
@@ -163,7 +146,7 @@
       <command value="mvn dependency:resolve" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ClientManagerTest">
+  <component name="RunManager" selected="JUnit.PurchaseManagerTest">
     <configuration name="ClientManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
@@ -239,9 +222,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ClientManagerTest" />
-        <item itemvalue="JUnit.ItemManagerTest" />
         <item itemvalue="JUnit.PurchaseManagerTest" />
+        <item itemvalue="JUnit.ItemManagerTest" />
+        <item itemvalue="JUnit.ClientManagerTest" />
         <item itemvalue="Docker.DockerFiles: Compose Deployment" />
         <item itemvalue="JUnit.tests in ORM" />
       </list>
@@ -278,7 +261,7 @@
       <workItem from="1732628450009" duration="319000" />
       <workItem from="1733256099907" duration="79000" />
       <workItem from="1733336835896" duration="3338000" />
-      <workItem from="1733742823994" duration="9114000" />
+      <workItem from="1733742823994" duration="9494000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -352,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732206739211</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="RedisPush">
+      <option name="closed" value="true" />
+      <created>1733757848932</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733757848932</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,7 +371,8 @@
     <MESSAGE value="co ja robie tuuuu" />
     <MESSAGE value="uuuuuu" />
     <MESSAGE value="CO TY TUTAJ ROBISZ?" />
-    <option name="LAST_COMMIT_MESSAGE" value="CO TY TUTAJ ROBISZ?" />
+    <MESSAGE value="RedisPush" />
+    <option name="LAST_COMMIT_MESSAGE" value="RedisPush" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -37,7 +37,7 @@ class ItemManagerTest {
 
         List<Item> retrieved = itemManager.getAllItems();
         assertEquals(1, retrieved.size());
-        assertEquals(result.getItemName(), retrieved.getFirst().getItemName());
+        assertEquals(result.getItemName(), retrieved.get(0).getItemName());
     }
 
     @Test
@@ -62,10 +62,10 @@ class ItemManagerTest {
         Item item = new Item(new ObjectId(), "123", "Test Item", 100.0, true);
         itemManager.registerItem(item);
         List<Item> retrieved = itemManager.getAllItems();
-        itemManager.updateItemCost(retrieved.getFirst(), 50.0);
+        itemManager.updateItemCost(retrieved.get(0), 50.0);
         retrieved = itemManager.getAllItems();
 
-        assertEquals(50.0, retrieved.getFirst().getItemCost());
+        assertEquals(50.0, retrieved.get(0).getItemCost());
     }
 
     @Test
@@ -73,7 +73,7 @@ class ItemManagerTest {
         Item item = new Item(new ObjectId(), "123", "Test Item", 100.0, true);
         itemManager.registerItem(item);
         List<Item> retrieved = itemManager.getAllItems();
-        itemManager.removeItem(retrieved.getFirst());
+        itemManager.removeItem(retrieved.get(0));
 
         retrieved = itemManager.getAllItems();
         assertEquals(0, retrieved.size());
@@ -84,10 +84,10 @@ class ItemManagerTest {
         Item item = new Item(new ObjectId(), "123", "Test Item", 100.0, true);
         itemManager.registerItem(item);
         List<Item> retrieved = itemManager.getAllItems();
-        itemManager.buyItem(retrieved.getFirst());
+        itemManager.buyItem(retrieved.get(0));
         retrieved = itemManager.getAllItems();
 
-        assertFalse(retrieved.getFirst().isAvailable());
+        assertFalse(retrieved.get(0).isAvailable());
     }
 
     @Test
@@ -98,12 +98,12 @@ class ItemManagerTest {
         String newName = "New Item Name";
         double newCost = 50.0;
         boolean newAvailability = false;
-        itemManager.updateItem(retrieved.getFirst(), newName, newCost, newAvailability);
+        itemManager.updateItem(retrieved.get(0), newName, newCost, newAvailability);
         retrieved = itemManager.getAllItems();
 
-        assertEquals(newName, retrieved.getFirst().getItemName());
-        assertEquals(newCost, retrieved.getFirst().getItemCost());
-        assertEquals(newAvailability, retrieved.getFirst().isAvailable());
+        assertEquals(newName, retrieved.get(0).getItemName());
+        assertEquals(newCost, retrieved.get(0).getItemCost());
+        assertEquals(newAvailability, retrieved.get(0).isAvailable());
     }
 
     @Test
@@ -112,6 +112,6 @@ class ItemManagerTest {
         itemManager.registerItem(item);
         List<Item> retrieved = itemManager.getAllItems();
 
-        assertEquals("123", retrieved.getFirst().getItemID());
+        assertEquals("123", retrieved.get(0).getItemID());
     }
 }

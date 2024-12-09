@@ -35,10 +35,10 @@ class ClientManagerTest {
         List<Client> allClients = clientManager.getAllClients();
 
         assertEquals(1, allClients.size());
-        assertInstanceOf(IndividualClient.class, allClients.getFirst());
-        IndividualClient individualClient = (IndividualClient) allClients.getFirst();
+        assertInstanceOf(IndividualClient.class, allClients.get(0));
+        IndividualClient individualClient = (IndividualClient) allClients.get(0);
         assertEquals("Jan", individualClient.getFirstName());
-        assertEquals("Warszawa", allClients.getFirst().getAddress());
+        assertEquals("Warszawa", allClients.get(0).getAddress());
     }
 
     @Test
@@ -47,10 +47,10 @@ class ClientManagerTest {
         List<Client> allClients = clientManager.getAllClients();
 
         assertEquals(1, allClients.size());
-        assertInstanceOf(BusinessClient.class, allClients.getFirst());
-        BusinessClient businessClient = (BusinessClient) allClients.getFirst();
+        assertInstanceOf(BusinessClient.class, allClients.get(0));
+        BusinessClient businessClient = (BusinessClient) allClients.get(0);
         assertEquals("Tech Corp", businessClient.getCompanyName());
-        assertEquals("Kraków", allClients.getFirst().getAddress());
+        assertEquals("Kraków", allClients.get(0).getAddress());
     }
 
     @Test
