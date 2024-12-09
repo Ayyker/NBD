@@ -1,14 +1,13 @@
 package model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonDiscriminator;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @BsonDiscriminator(key = "type", value = "INDIVIDUAL")
@@ -49,5 +48,29 @@ public class IndividualClient extends Client {
                 ", lastName='" + lastName + '\'' +
                 ", pesel='" + pesel + '\'' +
                 "} " + super.toString();
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 }

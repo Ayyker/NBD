@@ -1,14 +1,14 @@
 package model;
 
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonDiscriminator;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @BsonDiscriminator(key = "type", value = "BUSINESS")
@@ -47,5 +47,25 @@ public class BusinessClient extends Client {
                 ", nipID='" + nipID + '\'' +
                 ", discount=" + discount +
                 "} " + super.toString();
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getNipID() {
+        return nipID;
+    }
+
+    public void setNipID(String nipID) {
+        this.nipID = nipID;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 }

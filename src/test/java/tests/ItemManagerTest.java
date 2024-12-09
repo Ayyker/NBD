@@ -12,12 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ItemManagerTest {
 
-    private static ItemRepository itemRepository;
     private static ItemManager itemManager;
 
     @BeforeAll
     static void setup() {
-        itemRepository = new ItemRepository();
+        ItemRepository itemRepository = new ItemRepository();
         itemManager = new ItemManager(itemRepository);
     }
 

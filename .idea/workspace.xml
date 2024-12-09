@@ -4,25 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="uuuuuu">
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="CO TY TUTAJ ROBISZ?">
+      <change afterPath="$PROJECT_DIR$/src/main/java/benchmarks/BaseBenchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/benchmarks/MongoDBBenchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/benchmarks/RedisBenchmark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/PurchaseJsonb.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractRedisRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/Config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepoJsonb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DockerFiles/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Purchase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" afterDir="false" />
-    </list>
-    <list id="222292f4-cff5-445e-afee-4f1f4550dbd3" name="Changes by Jajco" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Purchase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" afterDir="false" />
     </list>
     <list id="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" name="Changes by Lenovo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,60 +69,6 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java">
-      <ranges>
-        <range start1="0" end1="1" start2="0" end2="0" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="3" end1="3" start2="2" end2="3" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="4" end1="5" start2="4" end2="4" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="7" end1="7" start2="6" end2="7" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="10" end1="11" start2="10" end2="10" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="15" end1="15" start2="14" end2="15" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="16" end1="17" start2="16" end2="17" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="18" end1="18" start2="18" end2="19" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="20" end1="22" start2="21" end2="35" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="23" end1="24" start2="36" end2="39" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="25" end1="26" start2="40" end2="44" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="27" end1="28" start2="45" end2="49" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="30" end1="35" start2="51" end2="54" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="36" end1="36" start2="55" end2="57" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="37" end1="38" start2="58" end2="61" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="39" end1="40" start2="62" end2="66" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="43" end1="48" start2="69" end2="71" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="49" end1="50" start2="72" end2="75" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="51" end1="52" start2="76" end2="80" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="58" end1="59" start2="86" end2="86" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="60" end1="61" start2="87" end2="87" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/manager/ItemManager.java">
-      <ranges>
-        <range start1="3" end1="4" start2="3" end2="3" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="19" end1="21" start2="18" end2="20" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="25" end1="26" start2="24" end2="25" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="29" end1="32" start2="28" end2="30" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="47" end1="48" start2="45" end2="46" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="60" end1="61" start2="58" end2="59" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="72" end1="73" start2="70" end2="71" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="78" end1="78" start2="76" end2="81" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/manager/ClientManager.java">
-      <ranges>
-        <range start1="19" end1="20" start2="19" end2="19" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="26" end1="27" start2="25" end2="26" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="32" end1="33" start2="31" end2="32" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="61" end1="62" start2="60" end2="61" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java">
-      <ranges>
-        <range start1="23" end1="24" start2="23" end2="24" changelist="f9276447-6e85-4f82-b678-8b72a813b2b7" />
-        <range start1="26" end1="26" start2="26" end2="30" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-        <range start1="35" end1="37" start2="39" end2="41" changelist="222292f4-cff5-445e-afee-4f1f4550dbd3" />
-      </ranges>
-    </file>
-  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -177,7 +124,7 @@
     "git-widget-placeholder": "mongoDB",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/niko2/Desktop/NBD-mongoDB",
+    "last_opened_file_path": "C:/Users/niko2/Desktop/NBD-1.1.2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -216,8 +163,8 @@
       <command value="mvn dependency:resolve" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.tests in ORM">
-    <configuration name="ClientManagerTest.testRegisterBusinessClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ClientManagerTest">
+    <configuration name="ClientManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
         <pattern>
@@ -227,13 +174,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.ClientManagerTest" />
-      <option name="METHOD_NAME" value="testRegisterBusinessClient" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientManagerTest.testRegisterIndividualClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ItemManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
         <pattern>
@@ -242,9 +188,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.ClientManagerTest" />
-      <option name="METHOD_NAME" value="testRegisterIndividualClient" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="tests.ItemManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -264,22 +209,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ORM" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.PurchaseManagerTest" />
-      <option name="METHOD_NAME" value="testRegisterPurchaseWithUnavailableItem" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="tests in ORM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
@@ -294,6 +223,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DockerFiles: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="DockerFiles/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -302,11 +239,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.tests in ORM" />
+        <item itemvalue="JUnit.ClientManagerTest" />
+        <item itemvalue="JUnit.ItemManagerTest" />
         <item itemvalue="JUnit.PurchaseManagerTest" />
-        <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem" />
-        <item itemvalue="JUnit.ClientManagerTest.testRegisterBusinessClient" />
-        <item itemvalue="JUnit.ClientManagerTest.testRegisterIndividualClient" />
+        <item itemvalue="Docker.DockerFiles: Compose Deployment" />
+        <item itemvalue="JUnit.tests in ORM" />
       </list>
     </recent_temporary>
   </component>
@@ -336,7 +273,12 @@
       <workItem from="1732108758809" duration="193000" />
       <workItem from="1732115406960" duration="18592000" />
       <workItem from="1732184794009" duration="6952000" />
-      <workItem from="1732195553420" duration="10893000" />
+      <workItem from="1732195553420" duration="12334000" />
+      <workItem from="1732261090652" duration="2878000" />
+      <workItem from="1732628450009" duration="319000" />
+      <workItem from="1733256099907" duration="79000" />
+      <workItem from="1733336835896" duration="3338000" />
+      <workItem from="1733742823994" duration="9114000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -402,7 +344,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732198785573</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="CO TY TUTAJ ROBISZ?">
+      <option name="closed" value="true" />
+      <created>1732206739211</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1732206739211</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,7 +379,8 @@
     <MESSAGE value="LECIMY Z KOKSEM" />
     <MESSAGE value="co ja robie tuuuu" />
     <MESSAGE value="uuuuuu" />
-    <option name="LAST_COMMIT_MESSAGE" value="uuuuuu" />
+    <MESSAGE value="CO TY TUTAJ ROBISZ?" />
+    <option name="LAST_COMMIT_MESSAGE" value="CO TY TUTAJ ROBISZ?" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

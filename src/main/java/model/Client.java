@@ -1,16 +1,13 @@
 package model;
 
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.types.ObjectId;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.codecs.pojo.annotations.BsonIgnore;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 public abstract class Client {
 
@@ -48,5 +45,29 @@ public abstract class Client {
                 "personalID='" + personalID + '\'' +
                 ", address=" + address +
                 '}';
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getPersonalID() {
+        return personalID;
+    }
+
+    public void setPersonalID(String personalID) {
+        this.personalID = personalID;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

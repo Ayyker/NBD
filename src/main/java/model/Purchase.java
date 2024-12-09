@@ -1,15 +1,13 @@
 package model;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonDiscriminator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
 
-
-@Getter
-@Setter
 @NoArgsConstructor
 @Builder
 @BsonDiscriminator
@@ -41,6 +39,46 @@ public class Purchase {
         this.clientId = clientId;
         this.itemId = itemId;
         this.amount = amount;
+        this.totalCost = totalCost;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public ObjectId getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(ObjectId clientId) {
+        this.clientId = clientId;
+    }
+
+    public ObjectId getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(ObjectId itemId) {
+        this.itemId = itemId;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
 }
