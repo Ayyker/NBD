@@ -4,6 +4,7 @@ import jakarta.json.bind.annotation.JsonbCreator;
 import jakarta.json.bind.annotation.JsonbProperty;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 @NoArgsConstructor
 @Builder
@@ -36,6 +37,17 @@ public class PurchaseJsonb {
         this.amount = amount;
         this.totalCost = totalCost;
     }
+
+    public Purchase toPurchase() {
+        return new Purchase(
+                new ObjectId(this.getId()),
+                new ObjectId(this.getClientId()),
+                new ObjectId(this.getItemId()),
+                this.getAmount(),
+                this.getTotalCost()
+        );
+    }
+
 
     public String getId() {
         return id;

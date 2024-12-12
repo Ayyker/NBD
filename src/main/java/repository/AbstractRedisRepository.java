@@ -55,7 +55,12 @@ public abstract class AbstractRedisRepository implements AutoCloseable {
     }
 
     public boolean checkConnection() {
-        return pool.getPool().getResource().isConnected();
+        try {
+            return pool.getPool().getResource().isConnected();
+        } catch (Exception e) {
+            System.err.println("Redis connection failed: " + e.getMessage());
+            return false; // Zwróć `false`, jeśli nie można połączyć się z Redis
+        }
     }
 
     public void clearCache(){

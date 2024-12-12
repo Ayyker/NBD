@@ -1,6 +1,5 @@
 package repository;
 
-import com.mongodb.client.model.Filters;
 import jakarta.json.bind.Jsonb;
 import model.PurchaseJsonb;
 import org.bson.types.ObjectId;
@@ -14,7 +13,7 @@ public class PurchaseRepoJsonb extends AbstractRedisRepository {
 
     private final JedisPooled pool = getPool();
     private final Jsonb jsonb = getJsonb();
-    private final String prefix = "transaction:";
+    private final String prefix = "purchase:";
 
     public void save(PurchaseJsonb purchase) {
         if (purchase.getId() == null) {
@@ -51,5 +50,22 @@ public class PurchaseRepoJsonb extends AbstractRedisRepository {
     public void delete(ObjectId id) {
         String key = prefix + id.toString();
         pool.del(key);
+    }
+
+    public void saveWithTimeout(PurchaseJsonb purchase, int timeoutSeconds) {
+        if (purchase.getId() == null) {
+            purchase.setId(new ObjectId().toString());
+        }
+        String key = prefix + purchase.getId();
+        String json = jsonb.toJson(purchase);
+        pool.setex(key, timeoutSeconds, json); // Ustaw timeout
+    }
+
+    @Override
+    public void clearCache() {
+        Set<String> keys = pool.keys(prefix + "*");
+        for (String key : keys){
+            pool.del(key);
+        }
     }
 }

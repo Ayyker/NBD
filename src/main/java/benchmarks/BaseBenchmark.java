@@ -1,6 +1,9 @@
 package benchmarks;
 
-import com.mongodb.client.*;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.openjdk.jmh.annotations.*;
 import redis.clients.jedis.Jedis;
@@ -16,6 +19,8 @@ public class BaseBenchmark {
     private MongoCollection<Document> mongoCollection;
     private MongoClient mongoClient;
 
+    @Param({"100", "1000", "10000"}) // Liczba kluczy w danych testowych
+    private int numberOfKeys;
 
     @Setup(Level.Trial)
     public void setup() {
@@ -29,20 +34,21 @@ public class BaseBenchmark {
 
         // Przygotowanie danych w MongoDB
         mongoCollection.drop();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < numberOfKeys; i++) {
             Document doc = new Document("key", "key" + i).append("value", "value" + i);
             mongoCollection.insertOne(doc);
         }
 
         // Przygotowanie danych w Redis (Cache)
-        jedis.flushAll(); // Wyczyszczenie Redis przed testami
-        for (int i = 0; i < 100; i++) {
+        jedis.flushAll();
+        for (int i = 0; i < numberOfKeys; i++) {
             jedis.set("key" + i, "value" + i);
         }
     }
 
     @TearDown(Level.Trial)
     public void teardown() {
+        jedis.flushAll();
         jedis.close();
         mongoClient.close();
     }
@@ -50,19 +56,18 @@ public class BaseBenchmark {
     @Benchmark
     @Fork(value = 2, warmups = 1)
     public String testCacheHit() {
-        // Trafienie w cache
-        return jedis.get("key500");
+        int randomKey = (int) (Math.random() * numberOfKeys);
+        return jedis.get("key" + randomKey);
     }
 
     @Benchmark
     @Fork(value = 2, warmups = 1)
     public String testCacheMiss() {
-        // Brak trafienia w cache
-        String key = "key1001";
+        int randomKey = numberOfKeys + (int) (Math.random() * 1000); // Klucze spoza zakresu
+        String key = "key" + randomKey;
         String value = jedis.get(key);
 
         if (value == null) {
-            // Symulacja odczytu z MongoDB
             Document document = mongoCollection.find(new Document("key", key)).first();
             if (document != null) {
                 value = document.getString("value");
@@ -76,7 +81,13 @@ public class BaseBenchmark {
     @Benchmark
     @Fork(value = 2, warmups = 1)
     public void testInvalidateCache() {
-        // Unieważnienie cache
-        jedis.del("key500");
+        int randomKey = (int) (Math.random() * numberOfKeys);
+        jedis.del("key" + randomKey);
+    }
+
+    @Benchmark
+    @Fork(value = 2, warmups = 1)
+    public void testInvalidateAllCache() {
+        jedis.flushAll();
     }
 }

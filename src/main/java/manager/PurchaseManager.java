@@ -47,34 +47,59 @@ public class PurchaseManager {
                     amount,
                     totalCost
             );
-            purchaseRepositoryJsonb.save(jsonbPurchase);
-        } else {
-            // Fallback to MongoDB if Redis is unavailable
-            ClientSession clientSession = purchaseRepository.getClient().startSession();
-            try {
-                clientSession.startTransaction();
-                purchaseRepository.save(newPurchase);
-                clientSession.commitTransaction();
-            } catch (Exception e) {
-                clientSession.abortTransaction();
-                throw e;
-            } finally {
-                clientSession.close();
-            }
+            purchaseRepositoryJsonb.saveWithTimeout(jsonbPurchase, 300);
+        }
+        // Then Save to mongoDB
+        ClientSession clientSession = purchaseRepository.getClient().startSession();
+        try {
+            clientSession.startTransaction();
+            purchaseRepository.save(newPurchase);
+            clientSession.commitTransaction();
+        } catch (Exception e) {
+            clientSession.abortTransaction();
+            throw e;
+        } finally {
+            clientSession.close();
         }
     }
 
     public List<Purchase> getAllPurchases() {
+        // Najpierw spróbuj pobrać z Redisa
+        if (purchaseRepositoryJsonb.checkConnection()) {
+            try {
+                List<PurchaseJsonb> redisPurchases = purchaseRepositoryJsonb.findAll();
+                if (!redisPurchases.isEmpty()) {
+                    return redisPurchases.stream()
+                            .map(PurchaseJsonb::toPurchase) // Konwersja z JSONB na Purchase
+                            .toList();
+                }
+            } catch (Exception e) {
+                System.err.println("Error retrieving purchases from Redis: " + e.getMessage());
+            }
+        }
+
+        // Jeśli Redis zawiódł, użyj MongoDB
         return purchaseRepository.findAll();
     }
 
     public Purchase getPurchaseById(ObjectId purchaseId) {
+        // Najpierw sprawdź w Redis
+        if (purchaseRepositoryJsonb.checkConnection()) {
+            try {
+                PurchaseJsonb redisPurchase = purchaseRepositoryJsonb.findById(purchaseId);
+                if (redisPurchase != null) {
+                    return redisPurchase.toPurchase(); // Konwersja z JSONB na Purchase
+                }
+            } catch (Exception e) {
+                System.err.println("Error retrieving purchase from Redis: " + e.getMessage());
+            }
+        }
+
+        // Jeśli Redis zawiódł, użyj MongoDB
         return purchaseRepository.findById(purchaseId);
     }
 
-    public PurchaseJsonb getPurchaseByIdRedis(ObjectId purchaseId) {
-        return purchaseRepositoryJsonb.findById(purchaseId);
-    }
+
 
     public void deletePurchase(ObjectId purchaseId) {
         if (purchaseRepositoryJsonb.checkConnection()) {

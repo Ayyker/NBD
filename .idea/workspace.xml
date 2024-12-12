@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="RedisPush">
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" afterDir="false" />
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="Changed JDK21 methods to older ones in order for Redis to work">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/benchmarks/BaseBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/benchmarks/BaseBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/benchmarks/MongoDBBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/benchmarks/MongoDBBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/benchmarks/RedisBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/benchmarks/RedisBenchmark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/PurchaseJsonb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PurchaseJsonb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/AbstractRedisRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractRedisRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepoJsonb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepoJsonb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" afterDir="false" />
     </list>
     <list id="1f4bd6f0-f547-4398-a44b-b2d43d37e2ca" name="Changes by Lenovo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,20 +95,31 @@
     "JUnit.ItemManagerTest.testUpdateItemCost.executor": "Run",
     "JUnit.PurchaseManagerTest.executor": "Run",
     "JUnit.PurchaseManagerTest.testAddItemsToPurchase.executor": "Run",
+    "JUnit.PurchaseManagerTest.testClearCache.executor": "Run",
+    "JUnit.PurchaseManagerTest.testDeletePurchase.executor": "Run",
+    "JUnit.PurchaseManagerTest.testFindAllPurchases.executor": "Run",
+    "JUnit.PurchaseManagerTest.testFindById.executor": "Run",
     "JUnit.PurchaseManagerTest.testGetPurchasesByItem.executor": "Run",
     "JUnit.PurchaseManagerTest.testRegisterPurchase.executor": "Run",
+    "JUnit.PurchaseManagerTest.testRegisterPurchaseWithTimeout.executor": "Run",
     "JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem.executor": "Run",
     "JUnit.PurchaseManagerTest.testSavePurchaseNegative.executor": "Run",
     "JUnit.PurchaseManagerTest.testUpdatePurchase.executor": "Run",
+    "JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache.executor": "Run",
+    "JUnit.benchmarks.jmh_generated in ORM.executor": "Run",
     "JUnit.tests in ORM.executor": "Run",
+    "Maven.ORM [clean,install].executor": "Run",
+    "Maven.ORM [clean,package].executor": "Run",
     "Maven.ORM [clean].executor": "Run",
     "Maven.ORM [compile].executor": "Run",
     "Maven.ORM [dependency:purge-local-repository].executor": "Run",
     "Maven.ORM [dependency:resolve].executor": "Run",
+    "Maven.ORM [exec:java...].executor": "Run",
     "Maven.ORM [install].executor": "Run",
     "Maven.ORM [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
     "Maven.ORM [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor": "Run",
     "Maven.ORM [site].executor": "Run",
+    "Maven.ORM [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -122,7 +141,8 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "postgresql",
-      "mongo"
+      "mongo",
+      "redis"
     ]
   }
 }]]></component>
@@ -144,39 +164,13 @@
     <option name="myCommands">
       <command value="mvn dependency:purge-local-repository" />
       <command value="mvn dependency:resolve" />
+      <command value="mvn clean install" />
+      <command value="mvn exec:java -Dexec.mainClass=benchmarks.MongoDBBenchmark " />
+      <command value="mvn clean package " />
+      <command value="java -jar target/benchmarks.jar " />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PurchaseManagerTest">
-    <configuration name="ClientManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ORM" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.ClientManagerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ItemManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ORM" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.ItemManagerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.benchmarks.jmh_generated in ORM">
     <configuration name="PurchaseManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
@@ -192,7 +186,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="tests in ORM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PurchaseManagerTest.testRegisterPurchaseWithTimeout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
         <pattern>
@@ -201,18 +195,58 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="tests.PurchaseManagerTest" />
+      <option name="METHOD_NAME" value="testRegisterPurchaseWithTimeout" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DockerFiles: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="DockerFiles/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
+    <configuration name="PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ORM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.PurchaseManagerTest" />
+      <option name="METHOD_NAME" value="testRegisterPurchaseWithUnavailableItem" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PurchaseManagerTest.testUpdatePurchaseAndRefreshCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ORM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.PurchaseManagerTest" />
+      <option name="METHOD_NAME" value="testUpdatePurchaseAndRefreshCache" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="benchmarks.jmh_generated in ORM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ORM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="benchmarks.jmh_generated.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="benchmarks.jmh_generated" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
@@ -222,11 +256,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.benchmarks.jmh_generated in ORM" />
         <item itemvalue="JUnit.PurchaseManagerTest" />
-        <item itemvalue="JUnit.ItemManagerTest" />
-        <item itemvalue="JUnit.ClientManagerTest" />
-        <item itemvalue="Docker.DockerFiles: Compose Deployment" />
-        <item itemvalue="JUnit.tests in ORM" />
+        <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchaseWithTimeout" />
+        <item itemvalue="JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache" />
+        <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem" />
       </list>
     </recent_temporary>
   </component>
@@ -261,7 +295,10 @@
       <workItem from="1732628450009" duration="319000" />
       <workItem from="1733256099907" duration="79000" />
       <workItem from="1733336835896" duration="3338000" />
-      <workItem from="1733742823994" duration="9494000" />
+      <workItem from="1733742823994" duration="17688000" />
+      <workItem from="1733834339532" duration="27000" />
+      <workItem from="1733834634190" duration="18000" />
+      <workItem from="1733958177225" duration="12072000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -343,7 +380,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733757848932</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Changed JDK21 methods to older ones in order for Redis to work">
+      <option name="closed" value="true" />
+      <created>1733758170646</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733758170646</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,7 +417,8 @@
     <MESSAGE value="uuuuuu" />
     <MESSAGE value="CO TY TUTAJ ROBISZ?" />
     <MESSAGE value="RedisPush" />
-    <option name="LAST_COMMIT_MESSAGE" value="RedisPush" />
+    <MESSAGE value="Changed JDK21 methods to older ones in order for Redis to work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed JDK21 methods to older ones in order for Redis to work" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
