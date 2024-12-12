@@ -42,10 +42,16 @@ public class PurchaseRepoJsonb extends AbstractRedisRepository {
     }
 
     public PurchaseJsonb findById(ObjectId id) {
-        String key = prefix + id;
-        String json = pool.get(key);
-        return jsonb.fromJson(json, PurchaseJsonb.class);
+        try {
+            String key = prefix + id;
+            String json = pool.get(key);
+            return json != null ? jsonb.fromJson(json, PurchaseJsonb.class) : null;
+        } catch (Exception e) {
+            System.err.println("Failed to fetch data from Redis: " + e.getMessage());
+            return null;
+        }
     }
+
 
     public void delete(ObjectId id) {
         String key = prefix + id.toString();

@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="Changed JDK21 methods to older ones in order for Redis to work">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="wokrs?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/benchmarks/BaseBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/benchmarks/BaseBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/benchmarks/MongoDBBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/benchmarks/MongoDBBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/benchmarks/RedisBenchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/benchmarks/RedisBenchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/PurchaseJsonb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PurchaseJsonb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/AbstractRedisRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractRedisRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepoJsonb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepoJsonb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" afterDir="false" />
     </list>
@@ -105,7 +98,7 @@
     "JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem.executor": "Run",
     "JUnit.PurchaseManagerTest.testSavePurchaseNegative.executor": "Run",
     "JUnit.PurchaseManagerTest.testUpdatePurchase.executor": "Run",
-    "JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache.executor": "Run",
+    "JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache.executor": "Coverage",
     "JUnit.benchmarks.jmh_generated in ORM.executor": "Run",
     "JUnit.tests in ORM.executor": "Run",
     "Maven.ORM [clean,install].executor": "Run",
@@ -170,7 +163,7 @@
       <command value="java -jar target/benchmarks.jar " />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.benchmarks.jmh_generated in ORM">
+  <component name="RunManager" selected="JUnit.PurchaseManagerTest">
     <configuration name="PurchaseManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
@@ -256,11 +249,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.benchmarks.jmh_generated in ORM" />
         <item itemvalue="JUnit.PurchaseManagerTest" />
-        <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchaseWithTimeout" />
-        <item itemvalue="JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache" />
         <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem" />
+        <item itemvalue="JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache" />
+        <item itemvalue="JUnit.benchmarks.jmh_generated in ORM" />
+        <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchaseWithTimeout" />
       </list>
     </recent_temporary>
   </component>
@@ -298,7 +291,7 @@
       <workItem from="1733742823994" duration="17688000" />
       <workItem from="1733834339532" duration="27000" />
       <workItem from="1733834634190" duration="18000" />
-      <workItem from="1733958177225" duration="12072000" />
+      <workItem from="1733958177225" duration="13234000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -388,7 +381,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733758170646</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="wokrs?">
+      <option name="closed" value="true" />
+      <created>1734043262873</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1734043262873</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -418,7 +419,8 @@
     <MESSAGE value="CO TY TUTAJ ROBISZ?" />
     <MESSAGE value="RedisPush" />
     <MESSAGE value="Changed JDK21 methods to older ones in order for Redis to work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed JDK21 methods to older ones in order for Redis to work" />
+    <MESSAGE value="wokrs?" />
+    <option name="LAST_COMMIT_MESSAGE" value="wokrs?" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -426,6 +428,12 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ORM$ItemManagerTest.ic" NAME="ItemManagerTest Coverage Results" MODIFIED="1732195421546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>tests.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ORM$PurchaseManagerTest_testUpdatePurchaseAndRefreshCache.ic" NAME="PurchaseManagerTest.testUpdatePurchaseAndRefreshCache Coverage Results" MODIFIED="1734043466036" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>tests.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ORM$PurchaseManagerTest.ic" NAME="PurchaseManagerTest Coverage Results" MODIFIED="1734043478468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>tests.*</FILTER>
     </SUITE>
   </component>

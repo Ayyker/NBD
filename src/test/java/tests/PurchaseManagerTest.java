@@ -10,6 +10,8 @@ import repository.ItemRepository;
 import repository.PurchaseRepository;
 
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -19,7 +21,7 @@ class PurchaseManagerTest {
     private ItemManager itemManager;
     private PurchaseRepoJsonb purchaseRepoJsonb;
 
-    @BeforeAll
+    @BeforeEach
     public void setUp() {
         PurchaseRepository purchaseRepository = new PurchaseRepository(); // MongoDB Repository
         purchaseRepoJsonb = new PurchaseRepoJsonb(); // Redis Repository
@@ -27,7 +29,7 @@ class PurchaseManagerTest {
         purchaseManager = new PurchaseManager(purchaseRepository, purchaseRepoJsonb, itemManager);
     }
 
-    @BeforeEach
+    @AfterEach
     public void cleanDatabase() {
         purchaseManager.getDatabase().drop(); // Clean MongoDB
         itemManager.getDatabase().drop();
@@ -36,7 +38,6 @@ class PurchaseManagerTest {
         } catch (Exception e) {
             System.err.println("Redis connection failed: " + e.getMessage());
         }
-
     }
 
     @Test
@@ -49,25 +50,25 @@ class PurchaseManagerTest {
         assertThrows(IllegalArgumentException.class, () -> purchaseManager.registerPurchase(id2, clientId, itemId, 10, -100.50));
     }
 
-//    @Test
-//    public void testFindById() {
-//        ObjectId id = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId = new ObjectId();
-//        itemManager.registerItem(itemId, "Test Item", 50, "what", true);
-//        purchaseManager.registerPurchase(id, clientId, itemId, 5, 50.25);
-//
-//
-//        Purchase retrievedPurchase = purchaseManager.getPurchaseById(id);
-//        assertNotNull(retrievedPurchase);
-//        assertEquals(clientId, retrievedPurchase.getClientId());
-//        assertEquals(itemId, retrievedPurchase.getItemId());
-//        assertEquals(5, retrievedPurchase.getAmount());
-//        assertEquals(50.25, retrievedPurchase.getTotalCost());
-//
-//        // Verify in Redis
-//        assertNotNull(purchaseManager.getPurchaseById(id));
-//    }
+    @Test
+    public void testFindById() {
+        ObjectId id = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId = new ObjectId();
+        itemManager.registerItem(itemId, "Test Item", 50, "what", true);
+        purchaseManager.registerPurchase(id, clientId, itemId, 5, 50.25);
+
+
+        Purchase retrievedPurchase = purchaseManager.getPurchaseById(id);
+        assertNotNull(retrievedPurchase);
+        assertEquals(clientId, retrievedPurchase.getClientId());
+        assertEquals(itemId, retrievedPurchase.getItemId());
+        assertEquals(5, retrievedPurchase.getAmount());
+        assertEquals(50.25, retrievedPurchase.getTotalCost());
+
+        // Verify in Redis
+        assertNotNull(purchaseManager.getPurchaseById(id));
+    }
 
     @Test
     public void testDeletePurchase() {
@@ -88,27 +89,27 @@ class PurchaseManagerTest {
         assertNull(purchaseManager.getPurchaseById(id));
     }
 
-//    @Test
-//    public void testFindAllPurchases() {
-//        ObjectId id1 = new ObjectId();
-//        ObjectId id2 = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId1 = new ObjectId();
-//        ObjectId itemId2 = new ObjectId();
-//        itemManager.registerItem(itemId1, "Test Item1", 50, "what", true);
-//        itemManager.registerItem(itemId2, "Test Item2", 50, "what", true);
-//
-//        purchaseManager.registerPurchase(id1, clientId, itemId1, 2, 20.99);
-//        purchaseManager.registerPurchase(id2, clientId, itemId2, 4, 40.99);
-//
-//        // Verify in MongoDB
-//        List<Purchase> purchases = purchaseManager.getAllPurchases();
-//        assertTrue(purchases.size() >= 2);
-//
-//        // Verify in Redis
-//        assertNotNull(purchaseManager.getPurchaseById(id1));
-//        assertNotNull(purchaseManager.getPurchaseById(id2));
-//    }
+    @Test
+    public void testFindAllPurchases() {
+        ObjectId id1 = new ObjectId();
+        ObjectId id2 = new ObjectId();
+        ObjectId clientId = new ObjectId();
+        ObjectId itemId1 = new ObjectId();
+        ObjectId itemId2 = new ObjectId();
+        itemManager.registerItem(itemId1, "Test Item1", 50, "what", true);
+        itemManager.registerItem(itemId2, "Test Item2", 50, "what", true);
+
+        purchaseManager.registerPurchase(id1, clientId, itemId1, 2, 20.99);
+        purchaseManager.registerPurchase(id2, clientId, itemId2, 4, 40.99);
+
+        // Verify in MongoDB
+        List<Purchase> purchases = purchaseManager.getAllPurchases();
+        assertTrue(purchases.size() >= 2);
+
+        // Verify in Redis
+        assertNotNull(purchaseManager.getPurchaseById(id1));
+        assertNotNull(purchaseManager.getPurchaseById(id2));
+    }
 
     @Test
     public void testRegisterPurchaseWithUnavailableItem() {
@@ -117,9 +118,7 @@ class PurchaseManagerTest {
         ObjectId itemId = new ObjectId();
         itemManager.registerItem(itemId, "Unavailable Item", 50, "what", false);
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            purchaseManager.registerPurchase(id, clientId, itemId, 1, 100.0);
-        });
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> purchaseManager.registerPurchase(id, clientId, itemId, 1, 100.0));
 
         assertEquals("Item must be available for purchase.", exception.getMessage());
     }
