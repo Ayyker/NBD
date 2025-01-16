@@ -16,6 +16,12 @@ public class IndividualClient extends Client implements Serializable {
 
     private String pesel;
 
+    public IndividualClient(int id, String address, String firstName, String lastName, String pesel) {
+        super(id, pesel, address);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+    }
 
     @Override
     public double getDiscount() {

@@ -7,5 +7,5 @@ import daos.BusinessClientDao;
 @Mapper
 public interface BusinessClientMapper {
     @DaoFactory
-    BusinessClientDao getBusinessClientDao();
+    BusinessClientDao businessClientDao();
 }

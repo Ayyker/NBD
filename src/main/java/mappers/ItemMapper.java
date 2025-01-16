@@ -7,5 +7,5 @@ import daos.ItemDao;
 @Mapper
 public interface ItemMapper {
     @DaoFactory
-    ItemDao getItemDao();
+    ItemDao itemDao();
 }

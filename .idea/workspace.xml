@@ -4,31 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="cass 1">
-      <change afterPath="$PROJECT_DIR$/src/main/java/daos/BusinessClientDaoImp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/daos/IndividualClientDaoImp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/daos/ItemDaoImp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/daos/PurchaseDaoImp.java" afterDir="false" />
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="cass 2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/mappers/BusinessClientMapperImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mappers/IndividualClientMapperImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mappers/ItemMapperImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mappers/PurchaseMapperImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/BusinessClientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFiles/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cassandra/SessionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cassandra/SessionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cassandra/initSession.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/BusinessClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/BusinessClientDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/IndividualClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/IndividualClientDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/ItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/PurchaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/PurchaseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/BusinessClientMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mappers/BusinessClientMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mappers/ItemMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/PurchaseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mappers/PurchaseMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/BusinessClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cass/BusinessClientCass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cass/BusinessClientCass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cass/ClientCass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cass/ClientCass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cass/IndividualClientCass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cass/IndividualClientCass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cass/PurchaseCass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cass/PurchaseCass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Purchase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/ids/BusinessClientId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/ids/BusinessClientId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/ids/ItemId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/ids/ItemId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/ids/PurchaseId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/ids/PurchaseId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/AbstractCassandraRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/AbstractCassandraRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,7 +297,7 @@
       <workItem from="1734877357487" duration="36000" />
       <workItem from="1734877568237" duration="357000" />
       <workItem from="1736258869767" duration="7183000" />
-      <workItem from="1736970515908" duration="18864000" />
+      <workItem from="1736970515908" duration="21984000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -415,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737029435755</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="cass 2">
+      <option name="closed" value="true" />
+      <created>1737049593536</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1737049593536</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +443,8 @@
     <MESSAGE value="Changed JDK21 methods to older ones in order for Redis to work" />
     <MESSAGE value="wokrs?" />
     <MESSAGE value="cass 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="cass 1" />
+    <MESSAGE value="cass 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="cass 2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

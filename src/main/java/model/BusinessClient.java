@@ -17,6 +17,12 @@ public class BusinessClient extends Client implements Serializable {
 
     private double discount;
 
+    public BusinessClient(int id, String address, String companyName, String nipID, double discount) {
+        super(id, nipID, address);
+        this.companyName = companyName;
+        this.nipID = nipID;
+        this.discount = discount;
+    }
 
     @Override
     public double getDiscount() {

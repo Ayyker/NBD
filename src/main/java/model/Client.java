@@ -15,7 +15,8 @@ public abstract class Client implements Serializable {
     private String address;
 
 
-    public Client(String personalID, String address) {
+    public Client(int id, String personalID, String address) {
+        this.id = id;
         this.personalID = personalID;
         this.address = address;
     }

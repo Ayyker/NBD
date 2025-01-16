@@ -7,5 +7,5 @@ import daos.PurchaseDao;
 @Mapper
 public interface PurchaseMapper {
     @DaoFactory
-    PurchaseDao getPurchaseDao();
+    PurchaseDao purchaseDao();
 }
