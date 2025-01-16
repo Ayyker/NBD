@@ -1,15 +1,20 @@
-package model;
+package model.Cass;
 
+import com.datastax.oss.driver.api.mapper.annotations.CqlName;
+import com.datastax.oss.driver.api.mapper.annotations.Entity;
+import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
 import lombok.Builder;
 import lombok.NoArgsConstructor;;
 
 import java.io.Serializable;
 
-
+@Entity
+@CqlName("Items")
 @NoArgsConstructor
 @Builder
-public class Item implements Serializable {
+public class ItemCass implements Serializable {
 
+    @PartitionKey
     private int id;
 
     private String itemID;
@@ -30,7 +35,7 @@ public class Item implements Serializable {
                 '}';
     }
 
-    public Item(int id, String itemID, String itemName, double itemCost, boolean available) {
+    public ItemCass(int id, String itemID, String itemName, double itemCost, boolean available) {
         this.id = id;
         this.itemID = itemID;
         this.itemName = itemName;

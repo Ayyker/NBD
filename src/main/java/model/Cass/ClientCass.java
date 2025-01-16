@@ -1,13 +1,16 @@
-package model;
+package model.Cass;
 
+import com.datastax.oss.driver.api.mapper.annotations.Entity;
+import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-
+@Entity
 @NoArgsConstructor
-public abstract class Client implements Serializable {
+public abstract class ClientCass implements Serializable {
 
+    @PartitionKey
     private int id;
 
     private String personalID;
@@ -15,7 +18,7 @@ public abstract class Client implements Serializable {
     private String address;
 
 
-    public Client(String personalID, String address) {
+    public ClientCass(String personalID, String address) {
         this.personalID = personalID;
         this.address = address;
     }
@@ -25,7 +28,7 @@ public abstract class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Client{" +
+        return "ClientCass{" +
                 "personalID='" + personalID + '\'' +
                 ", address=" + address +
                 '}';

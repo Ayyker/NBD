@@ -1,14 +1,20 @@
-package model;
+package model.Cass;
 
+import com.datastax.oss.driver.api.mapper.annotations.CqlName;
+import com.datastax.oss.driver.api.mapper.annotations.Entity;
+import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+@Entity
+@CqlName("Purchases")
 @NoArgsConstructor
 @Builder
-public class Purchase implements Serializable {
+public class PurchaseCass implements Serializable {
 
+    @PartitionKey
     private int id;
 
     private int clientId;
@@ -19,7 +25,7 @@ public class Purchase implements Serializable {
 
     private double totalCost;
 
-    public Purchase(int id, int clientId, int itemId, Integer amount, double totalCost) {
+    public PurchaseCass(int id, int clientId, int itemId, Integer amount, double totalCost) {
         this.id = id;
         this.clientId = clientId;
         this.itemId = itemId;

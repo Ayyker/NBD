@@ -1,18 +1,19 @@
-package model;
+package model.Cass;
 
-
+import com.datastax.oss.driver.api.mapper.annotations.ClusteringColumn;
+import com.datastax.oss.driver.api.mapper.annotations.CqlName;
+import com.datastax.oss.driver.api.mapper.annotations.Entity;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.io.Serializable;
 
-
+@Entity
+@CqlName("BusinessClients")
 @NoArgsConstructor
 @AllArgsConstructor
-public class BusinessClient extends Client implements Serializable {
+public class BusinessClientCass extends ClientCass implements Serializable {
 
+    @ClusteringColumn
     private String companyName;
 
     private String nipID;
