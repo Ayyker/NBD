@@ -12,7 +12,7 @@ public interface PurchaseDao {
 
     @Delete
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
-    void delete(PurchaseCass purchase);
+    void delete(int id);
 
     @Update
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
@@ -20,7 +20,7 @@ public interface PurchaseDao {
 
     @Select
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
-    PurchaseCass findById(PurchaseCass purchase);
+    PurchaseCass findById(int id);
 
     @Select
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")

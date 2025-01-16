@@ -1,52 +1,74 @@
 package repository;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
+import com.datastax.oss.driver.api.core.PagingIterable;
+import com.datastax.oss.driver.api.core.cql.SimpleStatement;
+import com.datastax.oss.driver.api.core.type.DataTypes;
+import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
+import daos.ItemDao;
+import daos.ItemDaoImp;
+import mappers.ItemMapperImp;
+import model.Cass.ItemCass;
 import model.Item;
-import org.bson.types.ObjectId;
+import model.ids.ItemId;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
+public class ItemRepository extends AbstractCassandraRepository implements AutoCloseable {
 
-public class ItemRepository extends AbstractMongoRepository{
-
-    private final MongoCollection<Item> itemCollection;
+    ItemDao itemDao;
+    ItemMapperImp mapper = new ItemMapperImp();
 
     public ItemRepository() {
-        initDbConnection();
-        MongoDatabase database = getDatabase();
-        itemCollection = database.getCollection("items", Item.class);
+        super();
+        this.createTable();
+        this.itemDao = new ItemDaoImp(this.session);
     }
 
-    public void save(Item item) {
-        itemCollection.insertOne(item);
+    public void registerItem(Item item) {
+        ItemCass itemC = this.mapper.toItemCass(item);
+        itemDao.create(itemC);
     }
 
-    public void update(Item item) {
-        itemCollection.replaceOne(eq("_id", item.getId()), item);
+    public void updateItem(Item item) {
+        ItemCass itemC = this.mapper.toItemCass(item);
+        itemDao.update(itemC);
     }
 
-    public List<Item> findAll() {
-        List<Item> items = new ArrayList<>();
-        for (Item item : itemCollection.find()) {
-            items.add(item);
+    public void removeItem(int id) {
+        itemDao.delete(id);
+    }
+
+    public List<Item> getAllItems() {
+        PagingIterable<ItemCass> items = this.itemDao.findAll();
+        List<Item> items2 = new ArrayList<>();
+        for (ItemCass item : items) {
+            items2.add(this.mapper.toItem(item));
         }
-        return items;
+        return items2;
     }
 
-    public Item findByItemId(String item_id) {
-        return itemCollection.find(Filters.eq("item_id", item_id)).first();
+    public Item getItemById(int id) {
+        ItemCass item = this.itemDao.findById(id);
+        return this.mapper.toItem(item);
     }
 
-    public void delete(ObjectId id) {
-        itemCollection.deleteOne(Filters.eq("_id", id));
+    private void createTable() {
+        SimpleStatement createTableIfNotExist =
+                SchemaBuilder.createTable("onlineStore", "Items")
+                        .ifNotExists()
+                        .withPartitionKey(ItemId.ID, DataTypes.INT)
+                        .withColumn(ItemId.ITEM_ID, DataTypes.ASCII)
+                        .withColumn(ItemId.ITEM_NAME, DataTypes.ASCII)
+                        .withColumn(ItemId.ITEM_COST, DataTypes.DOUBLE)
+                        .withColumn(ItemId.AVAILABLE, DataTypes.BOOLEAN)
+                        .build();
+        session.execute(createTableIfNotExist);
     }
 
     @Override
     public void close() throws Exception {
-        closeConnection();
+        session.close();
     }
 }

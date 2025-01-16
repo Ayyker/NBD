@@ -1,22 +1,23 @@
 package repository;
 
+import com.datastax.oss.driver.api.core.PagingIterable;
 import com.datastax.oss.driver.api.core.cql.SimpleStatement;
 import com.datastax.oss.driver.api.core.type.DataTypes;
 import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
 import daos.BusinessClientDao;
 import daos.BusinessClientDaoImp;
-import mappers.BusinessClientMapper;
+import mappers.BusinessClientMapperImp;
+import model.BusinessClient;
+import model.Cass.BusinessClientCass;
 import model.ids.BusinessClientId;
 
-public class BusinessClientRepository extends AbstractCassandraRepository {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BusinessClientRepository extends AbstractCassandraRepository implements AutoCloseable {
 
     BusinessClientDao clientDao;
-    BusinessClientMapper mapper = new BusinessClientMapper() {
-        @Override
-        public BusinessClientDao businessClientDao() {
-            return null;
-        }
-    };
+    BusinessClientMapperImp mapper = new BusinessClientMapperImp();
 
     public BusinessClientRepository() {
         super();
@@ -24,6 +25,33 @@ public class BusinessClientRepository extends AbstractCassandraRepository {
         this.clientDao = new BusinessClientDaoImp(this.session);
     }
 
+    public void registerBusinessClient(BusinessClient businessClient) {
+        BusinessClientCass client = this.mapper.toBusinessClientCass(businessClient);
+        clientDao.create(client);
+    }
+
+    public void updateBusinessClient(BusinessClient businessClient) {
+        BusinessClientCass client = this.mapper.toBusinessClientCass(businessClient);
+        clientDao.update(client);
+    }
+
+    public void removeBusinessClient(int id) {
+        clientDao.delete(id);
+    }
+
+    public List<BusinessClient> getAllBusinessClients() {
+        PagingIterable<BusinessClientCass> clients = this.clientDao.findAll();
+        List<BusinessClient> businessClients = new ArrayList<>();
+        for (BusinessClientCass client : clients) {
+            businessClients.add(this.mapper.toBusinessClient(client));
+        }
+        return businessClients;
+    }
+
+    public BusinessClient getBusinessClientById(int id) {
+        BusinessClientCass client = this.clientDao.findById(id);
+        return this.mapper.toBusinessClient(client);
+    }
 
     private void createTable() {
         SimpleStatement createTableIfNotExist =
@@ -36,5 +64,10 @@ public class BusinessClientRepository extends AbstractCassandraRepository {
                 .withColumn(BusinessClientId.DISCOUNT, DataTypes.DOUBLE)
                 .build();
         session.execute(createTableIfNotExist);
+    }
+
+    @Override
+    public void close() throws Exception {
+        session.close();
     }
 }

@@ -12,7 +12,7 @@ public interface BusinessClientDao {
 
     @Delete
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
-    void delete(BusinessClientCass client);
+    void delete(int id);
 
     @Update
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
@@ -20,7 +20,7 @@ public interface BusinessClientDao {
 
     @Select
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
-    BusinessClientCass findById(BusinessClientCass client);
+    BusinessClientCass findById(int id);
 
     @Select
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")

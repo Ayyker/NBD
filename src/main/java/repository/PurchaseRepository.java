@@ -1,55 +1,74 @@
 package repository;
 
-import com.mongodb.MongoClientSettings;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
+import com.datastax.oss.driver.api.core.PagingIterable;
+import com.datastax.oss.driver.api.core.cql.SimpleStatement;
+import com.datastax.oss.driver.api.core.type.DataTypes;
+import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
+import daos.PurchaseDao;
+import daos.PurchaseDaoImp;
+import mappers.PurchaseMapperImp;
+import model.Cass.PurchaseCass;
 import model.Purchase;
-import org.bson.Document;
-import org.bson.codecs.configuration.CodecProvider;
-import org.bson.codecs.configuration.CodecRegistries;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
-import org.bson.types.ObjectId;
+import model.ids.PurchaseId;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseRepository extends AbstractMongoRepository {
-    private final MongoCollection<Purchase> purchaseCollection;
+public class PurchaseRepository extends AbstractCassandraRepository implements AutoCloseable {
+
+    PurchaseDao purchaseDao;
+    PurchaseMapperImp mapper = new PurchaseMapperImp();
 
     public PurchaseRepository() {
-        initDbConnection();
-        MongoDatabase database = getDatabase();
-        CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
-        CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-                CodecRegistries.fromProviders(pojoCodecProvider));
-        purchaseCollection = database.getCollection("purchases", Purchase.class).withCodecRegistry(pojoCodecRegistry);
+        super();
+        this.createTable();
+        this.purchaseDao = new PurchaseDaoImp(this.session);
     }
 
-    public void save(Purchase purchase) {
-        purchaseCollection.insertOne(purchase);
+    public void registerPurchase(Purchase purchase) {
+        PurchaseCass purchaseCass = this.mapper.toPurchaseCass(purchase);
+        purchaseDao.create(purchaseCass);
     }
 
-    public void update(Purchase purchase) {
-        purchaseCollection.updateOne(Filters.eq("_id", purchase.getId()),
-                new Document("$set", purchase));
+    public void updatePurchase(Purchase purchase) {
+        PurchaseCass purchaseCass = this.mapper.toPurchaseCass(purchase);
+        purchaseDao.update(purchaseCass);
     }
 
-    public List<Purchase> findAll() {
-        return purchaseCollection.find().into(new ArrayList<>());
+    public void removePurchase(int id) {
+        purchaseDao.delete(id);
     }
 
-    public Purchase findById(ObjectId id) {
-        return purchaseCollection.find(Filters.eq("_id", id)).first();
+    public List<Purchase> getAllIPurchases() {
+        PagingIterable<PurchaseCass> purchaseCasses = this.purchaseDao.findAll();
+        List<Purchase> purchases = new ArrayList<>();
+        for (PurchaseCass purchaseCass : purchaseCasses) {
+            purchases.add(this.mapper.toPurchase(purchaseCass));
+        }
+        return purchases;
     }
 
-    public void delete(ObjectId id) {
-        purchaseCollection.deleteOne(Filters.eq("_id", id));
+    public Purchase getPurchaseById(int id) {
+        PurchaseCass purchase = this.purchaseDao.findById(id);
+        return this.mapper.toPurchase(purchase);
+    }
+
+    private void createTable() {
+        SimpleStatement createTableIfNotExist =
+                SchemaBuilder.createTable("onlineStore", "Purchases")
+                        .ifNotExists()
+                        .withPartitionKey(PurchaseId.ID, DataTypes.INT)
+                        .withColumn(PurchaseId.CLIENT_ID, DataTypes.INT)
+                        .withColumn(PurchaseId.ITEM_ID, DataTypes.INT)
+                        .withColumn(PurchaseId.AMOUNT, DataTypes.INT)
+                        .withColumn(PurchaseId.TOTAL_COST, DataTypes.DOUBLE)
+                        .build();
+        session.execute(createTableIfNotExist);
     }
 
     @Override
     public void close() throws Exception {
-        closeConnection();
+        session.close();
     }
 }

@@ -33,11 +33,11 @@ public class ItemDaoImp extends AbstractCassandraRepository implements ItemDao {
     }
 
     @Override
-    public void delete(ItemCass item) {
+    public void delete(int id) {
         String query = "DELETE FROM Items WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                item.getId()
+                id
         );
         session.execute(boundStatement);
     }
@@ -57,11 +57,11 @@ public class ItemDaoImp extends AbstractCassandraRepository implements ItemDao {
     }
 
     @Override
-    public ItemCass findById(ItemCass item) {
+    public ItemCass findById(int id) {
         String query = "SELECT * FROM Items WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                item.getId()
+                id
         );
         Row row = session.execute(boundStatement).one();
 

@@ -4,7 +4,7 @@ import com.datastax.oss.driver.api.mapper.annotations.CqlName;
 import com.datastax.oss.driver.api.mapper.annotations.Entity;
 import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
 import lombok.Builder;
-import lombok.NoArgsConstructor;;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 

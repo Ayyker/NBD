@@ -33,11 +33,11 @@ public class IndividualClientDaoImp extends AbstractCassandraRepository implemen
     }
 
     @Override
-    public void delete(IndividualClientCass client) {
+    public void delete(int id) {
         String query = "DELETE FROM IndividualClients WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                client.getId()
+                id
         );
         session.execute(boundStatement);
     }
@@ -57,11 +57,11 @@ public class IndividualClientDaoImp extends AbstractCassandraRepository implemen
     }
 
     @Override
-    public IndividualClientCass findById(IndividualClientCass client) {
+    public IndividualClientCass findById(int id) {
         String query = "SELECT * FROM IndividualClients WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                client.getId()
+                id
         );
         Row row = session.execute(boundStatement).one();
 

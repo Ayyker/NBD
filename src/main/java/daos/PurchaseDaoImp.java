@@ -33,11 +33,11 @@ public class PurchaseDaoImp extends AbstractCassandraRepository implements Purch
     }
 
     @Override
-    public void delete(PurchaseCass purchase) {
+    public void delete(int id) {
         String query = "DELETE FROM Purchases WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                purchase.getId()
+                id
         );
         session.execute(boundStatement);
     }
@@ -57,11 +57,11 @@ public class PurchaseDaoImp extends AbstractCassandraRepository implements Purch
     }
 
     @Override
-    public PurchaseCass findById(PurchaseCass purchase) {
+    public PurchaseCass findById(int id) {
         String query = "SELECT * FROM Purchases WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                purchase.getId()
+                id
         );
         Row row = session.execute(boundStatement).one();
 

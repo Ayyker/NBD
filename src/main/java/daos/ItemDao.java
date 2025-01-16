@@ -12,7 +12,7 @@ public interface ItemDao {
 
     @Delete
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
-    void delete(ItemCass item);
+    void delete(int id);
 
     @Update
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
@@ -20,7 +20,7 @@ public interface ItemDao {
 
     @Select
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")
-    ItemCass findById(ItemCass item);
+    ItemCass findById(int id);
 
     @Select
     @StatementAttributes(consistencyLevel = "LOCAL_QUORUM")

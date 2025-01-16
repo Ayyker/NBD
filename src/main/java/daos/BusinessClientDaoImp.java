@@ -32,11 +32,11 @@ public class BusinessClientDaoImp extends AbstractCassandraRepository implements
     }
 
     @Override
-    public void delete(BusinessClientCass client) {
+    public void delete(int id) {
         String query = "DELETE FROM BusinessClients WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                client.getId()
+                id
         );
         session.execute(boundStatement);
     }
@@ -56,11 +56,11 @@ public class BusinessClientDaoImp extends AbstractCassandraRepository implements
     }
 
     @Override
-    public BusinessClientCass findById(BusinessClientCass client) {
+    public BusinessClientCass findById(int id) {
         String query = "SELECT * FROM BusinessClients WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
-                client.getId()
+                id
         );
         Row row = session.execute(boundStatement).one();
 
