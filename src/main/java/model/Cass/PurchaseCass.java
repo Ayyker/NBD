@@ -21,11 +21,11 @@ public class PurchaseCass implements Serializable {
 
     private int itemId;
 
-    private Integer amount;
+    private int amount;
 
     private double totalCost;
 
-    public PurchaseCass(int id, int clientId, int itemId, Integer amount, double totalCost) {
+    public PurchaseCass(int id, int clientId, int itemId, int amount, double totalCost) {
         this.id = id;
         this.clientId = clientId;
         this.itemId = itemId;
@@ -57,11 +57,11 @@ public class PurchaseCass implements Serializable {
         this.itemId = itemId;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

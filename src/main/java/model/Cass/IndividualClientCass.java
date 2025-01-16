@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Entity
 @CqlName("IndividualClients")
 @NoArgsConstructor
-@AllArgsConstructor
 public class IndividualClientCass extends ClientCass implements Serializable {
 
     @ClusteringColumn(1)
@@ -22,6 +21,12 @@ public class IndividualClientCass extends ClientCass implements Serializable {
 
     private String pesel;
 
+    public IndividualClientCass(int id, String pesel, String address, String firstName, String lastName) {
+        super(id, pesel, address);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+    }
 
     @Override
     public double getDiscount() {

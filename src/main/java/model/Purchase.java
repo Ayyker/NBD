@@ -15,7 +15,7 @@ public class Purchase implements Serializable {
 
     private int itemId;
 
-    private Integer amount;
+    private int amount;
 
     private double totalCost;
 
@@ -51,11 +51,11 @@ public class Purchase implements Serializable {
         this.itemId = itemId;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

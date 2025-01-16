@@ -5,7 +5,7 @@ import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
 
 import java.net.InetSocketAddress;
 
-import static com.nbd.id.TransactionId.KEYSPACE_NAME;
+import static model.ids.PurchaseId.KEYSPACE_NAME;
 
 public class SessionFactory {
 

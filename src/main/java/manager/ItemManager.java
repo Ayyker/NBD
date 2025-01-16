@@ -47,7 +47,7 @@ public class ItemManager {
     }
 
     public void removeItem(Item item) {
-        itemRepository.delete(item.getId());
+        itemRepository.delete(item);
     }
 
     public List<Item> getAllItems() {

@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 @Entity
 @CqlName("BusinessClients")
-@NoArgsConstructor
 @AllArgsConstructor
 public class BusinessClientCass extends ClientCass implements Serializable {
 
@@ -20,6 +19,12 @@ public class BusinessClientCass extends ClientCass implements Serializable {
 
     private double discount;
 
+    public BusinessClientCass(int id, String address, String companyName, String nipID, double discount) {
+        super(id, nipID, address);
+        this.companyName = companyName;
+        this.nipID = nipID;
+        this.discount = discount;
+    }
 
     @Override
     public double getDiscount() {

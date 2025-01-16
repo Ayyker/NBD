@@ -18,7 +18,8 @@ public abstract class ClientCass implements Serializable {
     private String address;
 
 
-    public ClientCass(String personalID, String address) {
+    public ClientCass(int id, String personalID, String address) {
+        this.id = id;
         this.personalID = personalID;
         this.address = address;
     }
