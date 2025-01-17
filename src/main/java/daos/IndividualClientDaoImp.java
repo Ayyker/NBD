@@ -44,7 +44,7 @@ public class IndividualClientDaoImp extends AbstractCassandraRepository implemen
 
     @Override
     public void update(IndividualClientCass client) {
-        String query = "UPDATE IndividualClients SET pesel = ?, address = ?, firstName = ?, lastName = ?) WHERE id = ?";
+        String query = "UPDATE IndividualClients SET pesel = ?, address = ?, firstName = ?, lastName = ? WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
                 client.getPesel(),

@@ -42,7 +42,7 @@ class IndividualClientManagerTest {
 
     @Test
     void testRemoveIndividualClient() {
-        IndividualClient client = new IndividualClient(2, "98765432109", "Kraków", "Anna", "Nowak");
+        IndividualClient client = new IndividualClient(2, "98765432109", "Krakow", "Anna", "Nowak");
         individualClientManager.register(client);
 
         individualClientManager.remove(client.getId());
@@ -53,19 +53,36 @@ class IndividualClientManagerTest {
 
     @Test
     void testGetIndividualClientById() {
-        IndividualClient client = new IndividualClient(3, "19283746510", "Poznań", "Adam", "Wiśniewski");
+        IndividualClient client = new IndividualClient(3, "19283746510", "Poznan", "Adam", "Wisniewski");
         individualClientManager.register(client);
 
         IndividualClient retrievedClient = individualClientManager.getClientByItemID(client.getId());
         assertNotNull(retrievedClient);
         assertEquals("Adam", retrievedClient.getFirstName());
-        assertEquals("Wiśniewski", retrievedClient.getLastName());
+        assertEquals("Wisniewski", retrievedClient.getLastName());
+    }
+
+    @Test
+    void testUpdateIndividualClient() {
+        IndividualClient client = new IndividualClient(3, "19283746510", "Poznan", "Adam", "Wisniewski");
+        individualClientManager.register(client);
+
+        IndividualClient retrievedClient = individualClientManager.getClientByItemID(client.getId());
+        assertNotNull(retrievedClient);
+        assertEquals("Adam", retrievedClient.getFirstName());
+        assertEquals("Wisniewski", retrievedClient.getLastName());
+
+        client.setLastName("Matan");
+        individualClientManager.update(client);
+        retrievedClient = individualClientManager.getClientByItemID(client.getId());
+        assertNotNull(retrievedClient);
+        assertEquals("Matan", retrievedClient.getLastName());
     }
 
     @Test
     void testGetAllIndividualClients() {
-        IndividualClient client1 = new IndividualClient(4, "11111111111", "Gdańsk", "Ewa", "Kowalska");
-        IndividualClient client2 = new IndividualClient(5, "22222222222", "Łódź", "Piotr", "Zieliński");
+        IndividualClient client1 = new IndividualClient(4, "11111111111",  "Gdansk", "Ewa", "Kowalska");
+        IndividualClient client2 = new IndividualClient(5, "22222222222", "Lodz", "Piotr", "Zielinski");
 
         individualClientManager.register(client1);
         individualClientManager.register(client2);

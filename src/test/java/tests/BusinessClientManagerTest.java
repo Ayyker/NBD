@@ -31,18 +31,18 @@ class BusinessClientManagerTest {
 
     @Test
     void testRegisterBusinessClient() {
-        BusinessClient client = new BusinessClient(1, "TechCorp", "1234567890", "Kraków", 10.0);
+        BusinessClient client = new BusinessClient(1, "Krakow", "TechCorp", "1234567890", 10.0);
         businessClientManager.register(client);
 
         List<BusinessClient> clients = businessClientManager.getAll();
         assertEquals(1, clients.size());
         assertEquals("TechCorp", clients.get(0).getCompanyName());
-        assertEquals("Kraków", clients.get(0).getAddress());
+        assertEquals("Krakow", clients.get(0).getAddress());
     }
 
     @Test
     void testRemoveBusinessClient() {
-        BusinessClient client = new BusinessClient(2, "SoftServe", "9876543210", "Warszawa", 15.0);
+        BusinessClient client = new BusinessClient(2, "Warszawa", "SoftServe", "9876543210", 15.0);
         businessClientManager.register(client);
 
         businessClientManager.remove(client.getId());
@@ -52,20 +52,34 @@ class BusinessClientManagerTest {
     }
 
     @Test
+    void testUpdateBusinessClient() {
+        BusinessClient client = new BusinessClient(2, "Warszawa", "SoftServe", "9876543210", 15.0);
+        businessClientManager.register(client);
+
+        BusinessClient retrieved = businessClientManager.getClientByItemID(2);
+        assertEquals("SoftServe", retrieved.getCompanyName());
+        client.setCompanyName("HardServe");
+        businessClientManager.update(client);
+
+        BusinessClient retrieved2 = businessClientManager.getClientByItemID(2);
+        assertEquals("HardServe", retrieved2.getCompanyName());
+    }
+
+    @Test
     void testGetBusinessClientById() {
-        BusinessClient client = new BusinessClient(3, "NetCompany", "1928374650", "Poznań", 20.0);
+        BusinessClient client = new BusinessClient(3, "Poznan", "NetCompany", "1928374650", 20.0);
         businessClientManager.register(client);
 
         BusinessClient retrievedClient = businessClientManager.getClientByItemID(client.getId());
         assertNotNull(retrievedClient);
         assertEquals("NetCompany", retrievedClient.getCompanyName());
-        assertEquals("Poznań", retrievedClient.getAddress());
+        assertEquals("Poznan", retrievedClient.getAddress());
     }
 
     @Test
     void testGetAllBusinessClients() {
-        BusinessClient client1 = new BusinessClient(4, "AlphaTech", "1111111111", "Gdańsk", 5.0);
-        BusinessClient client2 = new BusinessClient(5, "BetaSoft", "2222222222", "Łódź", 7.5);
+        BusinessClient client1 = new BusinessClient(4, "Gdansk", "AlphaTech", "1111111111", 5.0);
+        BusinessClient client2 = new BusinessClient(5, "Lodz", "BetaSoft", "2222222222", 7.5);
 
         businessClientManager.register(client1);
         businessClientManager.register(client2);

@@ -44,7 +44,7 @@ public class ItemDaoImp extends AbstractCassandraRepository implements ItemDao {
 
     @Override
     public void update(ItemCass item) {
-        String query = "UPDATE Items SET itemId = ?, itemName = ?, itemCost = ?, available = ?) WHERE id = ?";
+        String query = "UPDATE Items SET itemId = ?, itemName = ?, itemCost = ?, available = ? WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
                 item.getItemID(),

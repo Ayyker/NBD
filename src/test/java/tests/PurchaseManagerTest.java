@@ -1,166 +1,126 @@
-//package tests;
-//
-//import manager.ItemManager;
-//import manager.PurchaseManager;
-//import model.Purchase;
-//import org.bson.types.ObjectId;
-//import org.junit.jupiter.api.*;
-//import repository.PurchaseRepoJsonb;
-//import repository.ItemRepository;
-//import repository.PurchaseRepository;
-//
-//
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-//class PurchaseManagerTest {
-//
-//    private PurchaseManager purchaseManager;
-//    private ItemManager itemManager;
-//    private PurchaseRepoJsonb purchaseRepoJsonb;
-//
-//    @BeforeEach
-//    public void setUp() {
-//        PurchaseRepository purchaseRepository = new PurchaseRepository(); // MongoDB Repository
-//        purchaseRepoJsonb = new PurchaseRepoJsonb(); // Redis Repository
-//        itemManager = new ItemManager(new ItemRepository());
-//        purchaseManager = new PurchaseManager(purchaseRepository, purchaseRepoJsonb, itemManager);
-//    }
-//
-//    @AfterEach
-//    public void cleanDatabase() {
-//        purchaseManager.getDatabase().drop(); // Clean MongoDB
-//        itemManager.getDatabase().drop();
-//        try {
-//            purchaseRepoJsonb.clearCache();
-//        } catch (Exception e) {
-//            System.err.println("Redis connection failed: " + e.getMessage());
-//        }
-//    }
-//
-//    @Test
-//    public void testSavePurchaseNegative() {
-//        ObjectId id1 = new ObjectId();
-//        ObjectId id2 = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId = new ObjectId();
-//        assertThrows(IllegalArgumentException.class, () -> purchaseManager.registerPurchase(id1, clientId, itemId, -10, 100.50));
-//        assertThrows(IllegalArgumentException.class, () -> purchaseManager.registerPurchase(id2, clientId, itemId, 10, -100.50));
-//    }
-//
-//    @Test
-//    public void testFindById() {
-//        ObjectId id = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId = new ObjectId();
-//        itemManager.registerItem(itemId, "Test Item", 50, "what", true);
-//        purchaseManager.registerPurchase(id, clientId, itemId, 5, 50.25);
-//
-//
-//        Purchase retrievedPurchase = purchaseManager.getPurchaseById(id);
-//        assertNotNull(retrievedPurchase);
-//        assertEquals(clientId, retrievedPurchase.getClientId());
-//        assertEquals(itemId, retrievedPurchase.getItemId());
-//        assertEquals(5, retrievedPurchase.getAmount());
-//        assertEquals(50.25, retrievedPurchase.getTotalCost());
-//
-//        // Verify in Redis
-//        assertNotNull(purchaseManager.getPurchaseById(id));
-//    }
-//
-//    @Test
-//    public void testDeletePurchase() {
-//        ObjectId id = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId = new ObjectId();
-//        itemManager.registerItem(itemId, "Test Item", 50, "what", true);
-//        purchaseManager.registerPurchase(id, clientId, itemId, 3, 30.99);
-//
-//        // Delete from both MongoDB and Redis
-//        purchaseManager.deletePurchase(id);
-//
-//        // Verify deletion in MongoDB
-//        Purchase deletedPurchase = purchaseManager.getPurchaseById(id);
-//        assertNull(deletedPurchase);
-//
-//        // Verify deletion in Redis
-//        assertNull(purchaseManager.getPurchaseById(id));
-//    }
-//
-//    @Test
-//    public void testFindAllPurchases() {
-//        ObjectId id1 = new ObjectId();
-//        ObjectId id2 = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId1 = new ObjectId();
-//        ObjectId itemId2 = new ObjectId();
-//        itemManager.registerItem(itemId1, "Test Item1", 50, "what", true);
-//        itemManager.registerItem(itemId2, "Test Item2", 50, "what", true);
-//
-//        purchaseManager.registerPurchase(id1, clientId, itemId1, 2, 20.99);
-//        purchaseManager.registerPurchase(id2, clientId, itemId2, 4, 40.99);
-//
-//        // Verify in MongoDB
-//        List<Purchase> purchases = purchaseManager.getAllPurchases();
-//        assertTrue(purchases.size() >= 2);
-//
-//        // Verify in Redis
-//        assertNotNull(purchaseManager.getPurchaseById(id1));
-//        assertNotNull(purchaseManager.getPurchaseById(id2));
-//    }
-//
-//    @Test
-//    public void testRegisterPurchaseWithUnavailableItem() {
-//        ObjectId id = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId = new ObjectId();
-//        itemManager.registerItem(itemId, "Unavailable Item", 50, "what", false);
-//
-//        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> purchaseManager.registerPurchase(id, clientId, itemId, 1, 100.0));
-//
-//        assertEquals("Item must be available for purchase.", exception.getMessage());
-//    }
-//
-//    @Test
-//    public void testUpdatePurchaseAndRefreshCache() {
-//        ObjectId id = new ObjectId();
-//        ObjectId clientId = new ObjectId();
-//        ObjectId itemId = new ObjectId();
-//        itemManager.registerItem(itemId, "Test Item", 50, "what", true);
-//
-//        purchaseManager.registerPurchase(id, clientId, itemId, 5, 50.0);
-//
-//        // Update purchase
-//        Purchase updatedPurchase = new Purchase(id, clientId, itemId, 10, 100.0);
-//        purchaseManager.updatePurchase(updatedPurchase);
-//
-//        // Verify updated data in Redis
-//        Purchase refreshedPurchase = purchaseManager.getPurchaseById(id);
-//        assertNotNull(refreshedPurchase);
-//        assertEquals(10, refreshedPurchase.getAmount());
-//        assertEquals(100.0, refreshedPurchase.getTotalCost());
-//    }
-//
-////    @Test
-////    public void testRegisterPurchaseWithTimeout() throws InterruptedException {
-////        ObjectId id = new ObjectId();
-////        ObjectId clientId = new ObjectId();
-////        ObjectId itemId = new ObjectId();
-////        itemManager.registerItem(itemId, "Test Item", 50, "what", true);
-////
-////        // Register purchase with a 2-second timeout
-////        purchaseManager.registerPurchase(id, clientId, itemId, 2, 20.99);
-////
-////        // Verify in Redis immediately
-////        Purchase retrievedPurchase = purchaseManager.getPurchaseById(id);
-////        assertNotNull(retrievedPurchase);
-////
-////        // Wait for timeout and verify it has been removed from Redis
-////        Thread.sleep(30000); // Wait 3 seconds to ensure timeout
-////        Purchase afterTimeoutPurchase = purchaseManager.getPurchaseById(id);
-////        assertNull(afterTimeoutPurchase, "Purchase should expire from Redis after the timeout.");
-////    }
-//
-//}
+package tests;
+
+import Cassandra.SessionFactory;
+import com.datastax.oss.driver.api.core.CqlSession;
+import manager.ItemManager;
+import manager.PurchaseManager;
+import model.Item;
+import model.Purchase;
+import org.junit.jupiter.api.*;
+import repository.ItemRepository;
+import repository.PurchaseRepository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class PurchaseManagerTest {
+
+    private static PurchaseManager purchaseManager;
+    private static ItemManager itemManager;
+    CqlSession session = SessionFactory.initCassandraConnection();
+
+    @BeforeAll
+    static void setup() {
+        ItemRepository itemRepository = new ItemRepository();
+        PurchaseRepository purchaseRepository = new PurchaseRepository();
+        itemManager = new ItemManager(itemRepository);
+        purchaseManager = new PurchaseManager(purchaseRepository, itemManager);
+    }
+
+    @BeforeEach
+    void init() {
+        // Ensure the database is cleaned before each test
+        session.execute("TRUNCATE TABLE onlineStore.Items;");
+        session.execute("TRUNCATE TABLE onlineStore.Purchases;");
+    }
+
+    @Test
+    void testRegisterPurchase() {
+        Item item = new Item(1, "12345", "Laptop", 3000.0, true);
+        itemManager.registerItem(item);
+
+        purchaseManager.registerPurchase(1, 1001, 1, 2, 6000.0);
+
+        List<Purchase> purchases = purchaseManager.getAllPurchases();
+        assertEquals(1, purchases.size());
+        assertEquals(6000.0, purchases.get(0).getTotalCost());
+        assertEquals(1001, purchases.get(0).getClientId());
+    }
+
+    @Test
+    void testRegisterPurchaseInvalidAmount() {
+        Item item = new Item(2, "54321", "Tablet", 1500.0, true);
+        itemManager.registerItem(item);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                purchaseManager.registerPurchase(2, 1002, 2, -1, 1500.0));
+        assertEquals("Purchase amount must be greater than zero.", exception.getMessage());
+    }
+
+    @Test
+    void testRegisterPurchaseUnavailableItem() {
+        Item item = new Item(3, "67890", "Smartphone", 2000.0, false);
+        itemManager.registerItem(item);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                purchaseManager.registerPurchase(3, 1003, 3, 1, 2000.0));
+        assertEquals("Item must be available for purchase.", exception.getMessage());
+    }
+
+    @Test
+    void testGetPurchaseById() {
+        Item item = new Item(4, "11223", "Monitor", 800.0, true);
+        itemManager.registerItem(item);
+
+        purchaseManager.registerPurchase(4, 1004, 4, 3, 2400.0);
+
+        Purchase retrievedPurchase = purchaseManager.getPurchaseById(4);
+        assertNotNull(retrievedPurchase);
+        assertEquals(3, retrievedPurchase.getAmount());
+        assertEquals(2400.0, retrievedPurchase.getTotalCost());
+    }
+
+    @Test
+    void testDeletePurchase() {
+        Item item = new Item(5, "33445", "Keyboard", 100.0, true);
+        itemManager.registerItem(item);
+
+        purchaseManager.registerPurchase(5, 1005, 5, 1, 100.0);
+        purchaseManager.deletePurchase(5);
+
+        purchaseManager.getAllPurchases();
+        assertEquals(0, purchaseManager.getAllPurchases().size());
+    }
+
+    @Test
+    void testUpdatePurchase() {
+        Item item = new Item(6, "55667", "Mouse", 50.0, true);
+        itemManager.registerItem(item);
+
+        purchaseManager.registerPurchase(6, 1006, 6, 2, 100.0);
+
+        Purchase updatedPurchase = new Purchase(6, 1006, 6, 4, 200.0);
+        purchaseManager.updatePurchase(updatedPurchase);
+
+        Purchase retrievedPurchase = purchaseManager.getPurchaseById(6);
+        assertNotNull(retrievedPurchase);
+        assertEquals(4, retrievedPurchase.getAmount());
+        assertEquals(200.0, retrievedPurchase.getTotalCost());
+    }
+
+    @Test
+    void testGetAllPurchases() {
+        Item item1 = new Item(7, "77889", "Printer", 500.0, true);
+        Item item2 = new Item(8, "88990", "Scanner", 300.0, true);
+        itemManager.registerItem(item1);
+        itemManager.registerItem(item2);
+
+        purchaseManager.registerPurchase(7, 1007, 7, 1, 500.0);
+        purchaseManager.registerPurchase(8, 1008, 8, 2, 600.0);
+
+        List<Purchase> purchases = purchaseManager.getAllPurchases();
+        assertEquals(2, purchases.size());
+    }
+}

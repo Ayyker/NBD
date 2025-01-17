@@ -16,7 +16,7 @@ public class IndividualClient extends Client implements Serializable {
 
     private String pesel;
 
-    public IndividualClient(int id, String address, String firstName, String lastName, String pesel) {
+    public IndividualClient(int id, String pesel, String address, String firstName, String lastName) {
         super(id, pesel, address);
         this.firstName = firstName;
         this.lastName = lastName;

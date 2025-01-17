@@ -43,7 +43,7 @@ public class BusinessClientDaoImp extends AbstractCassandraRepository implements
 
     @Override
     public void update(BusinessClientCass client) {
-        String query = "UPDATE BusinessClients SET companyName = ?, nipID = ?, discount = ?, address = ?) WHERE id = ?";
+        String query = "UPDATE BusinessClients SET companyName = ?, nipID = ?, discount = ?, address = ? WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
                 client.getCompanyName(),

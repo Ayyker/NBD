@@ -25,6 +25,10 @@ public class IndividualClientManager {
         clientRepository.removeIndividualClient(id);
     }
 
+    public void update(IndividualClient client) {
+        clientRepository.updateIndividualClient(client);
+    }
+
     public List<IndividualClient> getAll() {
         return clientRepository.getAllIndividualClients();
     }

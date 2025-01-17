@@ -62,7 +62,7 @@ public class IndividualClientRepository extends AbstractCassandraRepository impl
                         .withColumn(IndividualClientId.PESEL, DataTypes.ASCII)
                         .withColumn(IndividualClientId.ADDRESS, DataTypes.ASCII)
                         .withColumn(IndividualClientId.FIRST_NAME, DataTypes.ASCII)
-                        .withColumn(IndividualClientId.LAST_NAME, DataTypes.DOUBLE)
+                        .withColumn(IndividualClientId.LAST_NAME, DataTypes.ASCII)
                         .build();
         session.execute(createTableIfNotExist);
     }

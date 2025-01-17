@@ -4,32 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="cass 3">
-      <change afterPath="$PROJECT_DIR$/src/main/java/manager/BusinessClientManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/manager/IndividualClientManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/IndividualClientRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/tests/IndividualClientManagerTest.java" afterDir="false" />
+    <list default="true" id="f9276447-6e85-4f82-b678-8b72a813b2b7" name="Changes" comment="cass 4">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/BusinessClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/BusinessClientDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Cassandra/NbdAddressTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Cassandra/NbdAddressTranslator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/daos/BusinessClientDaoImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/BusinessClientDaoImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/IndividualClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/IndividualClientDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/daos/IndividualClientDaoImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/IndividualClientDaoImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/ItemDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/daos/ItemDaoImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/ItemDaoImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/daos/PurchaseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/PurchaseDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/daos/PurchaseDaoImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/PurchaseDaoImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/ItemManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/PurchaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/PurchaseMapperImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mappers/PurchaseMapperImp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cass/ItemCass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cass/ItemCass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/BusinessClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/BusinessClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ClientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/ItemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/PurchaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.conf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ClientManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/manager/BusinessClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/BusinessClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/manager/IndividualClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/manager/IndividualClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/BusinessClientMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/IndividualClientMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/IndividualClientMapperImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mappers/IndividualClientMapperImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/ItemMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mappers/PurchaseMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/IndividualClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/IndividualClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/IndividualClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/BusinessClientManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/BusinessClientManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/IndividualClientManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/IndividualClientManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/ItemManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/PurchaseManagerTest.java" afterDir="false" />
     </list>
@@ -95,75 +89,80 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.DockerFiles: Compose Deployment.executor": "Run",
-    "JUnit.ClientManagerTest.executor": "Run",
-    "JUnit.ClientManagerTest.testGetAllClients.executor": "Run",
-    "JUnit.ClientManagerTest.testRegisterBusinessClient.executor": "Run",
-    "JUnit.ClientManagerTest.testRegisterIndividualClient.executor": "Run",
-    "JUnit.IndividualClientManagerTest.executor": "Run",
-    "JUnit.ItemManagerTest.executor": "Run",
-    "JUnit.ItemManagerTest.testBuyItem_AlreadyUnavailable.executor": "Run",
-    "JUnit.ItemManagerTest.testGetAvailableItems.executor": "Run",
-    "JUnit.ItemManagerTest.testGetItemByItemID.executor": "Run",
-    "JUnit.ItemManagerTest.testOptimisticLockingOnItemBuy.executor": "Run",
-    "JUnit.ItemManagerTest.testRegisterItem.executor": "Run",
-    "JUnit.ItemManagerTest.testRemoveItem.executor": "Run",
-    "JUnit.ItemManagerTest.testUpdateItemCost.executor": "Run",
-    "JUnit.PurchaseManagerTest.executor": "Run",
-    "JUnit.PurchaseManagerTest.testAddItemsToPurchase.executor": "Run",
-    "JUnit.PurchaseManagerTest.testClearCache.executor": "Run",
-    "JUnit.PurchaseManagerTest.testDeletePurchase.executor": "Run",
-    "JUnit.PurchaseManagerTest.testFindAllPurchases.executor": "Run",
-    "JUnit.PurchaseManagerTest.testFindById.executor": "Run",
-    "JUnit.PurchaseManagerTest.testGetPurchasesByItem.executor": "Run",
-    "JUnit.PurchaseManagerTest.testRegisterPurchase.executor": "Run",
-    "JUnit.PurchaseManagerTest.testRegisterPurchaseWithTimeout.executor": "Run",
-    "JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem.executor": "Run",
-    "JUnit.PurchaseManagerTest.testSavePurchaseNegative.executor": "Run",
-    "JUnit.PurchaseManagerTest.testUpdatePurchase.executor": "Run",
-    "JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache.executor": "Coverage",
-    "JUnit.benchmarks.jmh_generated in ORM.executor": "Run",
-    "JUnit.tests in ORM.executor": "Run",
-    "Maven.ORM [clean,install].executor": "Run",
-    "Maven.ORM [clean,package].executor": "Run",
-    "Maven.ORM [clean].executor": "Run",
-    "Maven.ORM [compile].executor": "Run",
-    "Maven.ORM [dependency:purge-local-repository].executor": "Run",
-    "Maven.ORM [dependency:resolve].executor": "Run",
-    "Maven.ORM [exec:java...].executor": "Run",
-    "Maven.ORM [install].executor": "Run",
-    "Maven.ORM [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "Maven.ORM [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor": "Run",
-    "Maven.ORM [site].executor": "Run",
-    "Maven.ORM [test].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Cassandra",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/niko2/Desktop/NBD",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "ml.llm.AIAssistantPromptsLibrary",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.DockerFiles: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BusinessClientManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientManagerTest.testGetAllClients.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientManagerTest.testRegisterBusinessClient.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ClientManagerTest.testRegisterIndividualClient.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.IndividualClientManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.IndividualClientManagerTest.testGetIndividualClientById.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.IndividualClientManagerTest.testUpdateIndividualClient.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testBuyItem_AlreadyUnavailable.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testGetAvailableItems.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testGetItemByItemID.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testOptimisticLockingOnItemBuy.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testRegisterItem.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testRemoveItem.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ItemManagerTest.testUpdateItemCost.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testAddItemsToPurchase.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testClearCache.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testDeletePurchase.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testFindAllPurchases.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testFindById.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testGetPurchasesByItem.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testRegisterPurchase.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testRegisterPurchaseWithTimeout.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testSavePurchaseNegative.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testUpdatePurchase.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.benchmarks.jmh_generated in ORM.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.java in ORM.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.tests in ORM.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [clean,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [dependency:purge-local-repository].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [dependency:resolve].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [exec:java...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [org.apache.maven.plugins:maven-install-plugin:3.1.2:install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [site].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ORM [test].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Cassandra&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/niko2/Desktop/NBD (1)/NBD&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.AIAssistantPromptsLibrary&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql",
-      "mongo",
-      "redis"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;,
+      &quot;mongo&quot;,
+      &quot;redis&quot;,
+      &quot;cassandra&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\niko2\Desktop\Studia\semestr5\nbd\ORM\DockerFiles" />
@@ -188,7 +187,22 @@
       <command value="java -jar target/benchmarks.jar " />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.IndividualClientManagerTest">
+  <component name="RunManager" selected="JUnit.IndividualClientManagerTest.testUpdateIndividualClient">
+    <configuration name="BusinessClientManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ORM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.BusinessClientManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="IndividualClientManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
       <extension name="coverage">
@@ -200,6 +214,22 @@
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.IndividualClientManagerTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IndividualClientManagerTest.testUpdateIndividualClient" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ORM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.IndividualClientManagerTest" />
+      <option name="METHOD_NAME" value="testUpdateIndividualClient" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -219,45 +249,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="java in ORM" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ORM" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.PurchaseManagerTest" />
-      <option name="METHOD_NAME" value="testRegisterPurchaseWithUnavailableItem" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration name="PurchaseManagerTest.testUpdatePurchaseAndRefreshCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ORM" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.PurchaseManagerTest" />
-      <option name="METHOD_NAME" value="testUpdatePurchaseAndRefreshCache" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DockerFiles: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="DockerFiles/docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
@@ -267,11 +265,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.IndividualClientManagerTest.testUpdateIndividualClient" />
         <item itemvalue="JUnit.IndividualClientManagerTest" />
-        <item itemvalue="Docker.DockerFiles: Compose Deployment" />
+        <item itemvalue="JUnit.java in ORM" />
+        <item itemvalue="JUnit.BusinessClientManagerTest" />
         <item itemvalue="JUnit.PurchaseManagerTest" />
-        <item itemvalue="JUnit.PurchaseManagerTest.testRegisterPurchaseWithUnavailableItem" />
-        <item itemvalue="JUnit.PurchaseManagerTest.testUpdatePurchaseAndRefreshCache" />
       </list>
     </recent_temporary>
   </component>
@@ -314,7 +312,9 @@
       <workItem from="1734877357487" duration="36000" />
       <workItem from="1734877568237" duration="357000" />
       <workItem from="1736258869767" duration="7183000" />
-      <workItem from="1736970515908" duration="30455000" />
+      <workItem from="1736970515908" duration="32723000" />
+      <workItem from="1737067125474" duration="6419000" />
+      <workItem from="1737073652329" duration="291000" />
     </task>
     <task id="LOCAL-00001" summary="First and last commit">
       <option name="closed" value="true" />
@@ -436,7 +436,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737052643510</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="cass 4">
+      <option name="closed" value="true" />
+      <created>1737064477269</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1737064477269</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +478,8 @@
     <MESSAGE value="cass 1" />
     <MESSAGE value="cass 2" />
     <MESSAGE value="cass 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="cass 3" />
+    <MESSAGE value="cass 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="cass 4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

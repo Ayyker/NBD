@@ -44,7 +44,7 @@ public class PurchaseDaoImp extends AbstractCassandraRepository implements Purch
 
     @Override
     public void update(PurchaseCass purchase) {
-        String query = "UPDATE Purchases SET itemId = ?, itemName = ?, itemCost = ?, available = ?) WHERE id = ?";
+        String query = "UPDATE Purchases SET clientId = ?, itemId = ?, amount = ?, totalCost = ? WHERE id = ?";
         PreparedStatement preparedStatement = session.prepare(query);
         BoundStatement boundStatement = preparedStatement.bind(
                 purchase.getClientId(),
@@ -84,7 +84,7 @@ public class PurchaseDaoImp extends AbstractCassandraRepository implements Purch
                 row.getInt("id"),
                 row.getInt("clientId"),
                 row.getInt("itemId"),
-                row.getInt("itemCost"),
+                row.getInt("amount"),
                 row.getDouble("totalCost")
         );
     }

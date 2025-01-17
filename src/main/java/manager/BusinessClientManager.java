@@ -25,6 +25,10 @@ public class BusinessClientManager {
         clientRepository.removeBusinessClient(id);
     }
 
+    public void update(BusinessClient client) {
+        clientRepository.updateBusinessClient(client);
+    }
+
     public List<BusinessClient> getAll() {
         return clientRepository.getAllBusinessClients();
     }
